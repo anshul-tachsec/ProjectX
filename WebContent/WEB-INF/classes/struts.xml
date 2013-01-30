@@ -1,0 +1,62 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor class="vaannila.interceptor.LoginInterceptor"
+				name="loginInterceptor">
+			</interceptor>
+			<interceptor-stack name="loggingStack">
+				<interceptor-ref name="mylogging" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="logginStack"></default-interceptor-ref>
+		<global-results>
+			<result name="securityerror">/WEB-INF/views/master_error.jsp</result>
+			<result name="error">/WEB-INF/views/master_error.jsp</result>
+			<result name="login">/login.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping
+				exception="org.apache.struts.register.exceptions.SecurityBreachException"
+				result="error" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+
+
+		<action name="LoginAction" class="vaannila.action.LoginAction">
+			<result name="login_input" type="dispatcher">/login.jsp</result>
+			<result name="login_success_pt" type="dispatcher">/WEB-INF/views/login_success_pt.jsp
+			</result>
+			<result name="login_success_hr" type="dispatcher">/WEB-INF/views/login_success_hr.jsp
+			</result>
+			<result name="login_success_fo" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
+			</result>
+			<result name="login_success_bi" type="dispatcher">/WEB-INF/views/login_success_bi.jsp
+			</result>
+			<result name="login_error_nopvg" type="dispatcher">/WEB-INF/views/login_error_nopvg.jsp
+			</result>
+			<result name="login_error" type="dispatcher">/WEB-INF/views/login_error.jsp
+			</result>
+			<result name="error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		<action name="LogoutAction" class="vaannila.action.LogoutAction">
+			<result name="logout_success" type="dispatcher">/WEB-INF/views/logout_success.jsp
+			</result>
+		</action>
+
+		<action name="PatientAction" class="vaannila.action.PatientAction">
+			<result name="patient_login" type="dispatcher">/WEB-INF/views/patient_login_success.jsp
+			</result>
+			<result name="login_error" type="dispatcher">/WEB-INF/views/login_error.jsp
+			</result>
+		</action>
+	</package>
+</struts>
