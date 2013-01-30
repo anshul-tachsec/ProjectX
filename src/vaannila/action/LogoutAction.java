@@ -13,6 +13,6 @@ public class LogoutAction extends ActionSupport {
 
 	public String execute() throws Exception { 
 		ServletActionContext.getRequest().getSession().invalidate();
-		return "logout_success";
+		  return "logout_success";
 	}
 }

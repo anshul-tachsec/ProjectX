@@ -4,6 +4,14 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
+<meta http-equiv="cache-control" content="no-cache">
+<!-- tells browser not to cache -->
+<meta http-equiv="expires" content="0">
+<!-- says that the cache expires 'now' -->
+<meta http-equiv="pragma" content="no-cache">
+<!-- says not to use cached stuff, if there is any -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <s:head />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Staff Login Page</title>
@@ -12,6 +20,7 @@
 	<div style="float: right;">
 		<h3>Staff Login</h3>
 		<s:form action="LoginAction" method="post">
+			<s:hidden name="loginAttempt" value="%{'1'}" />
 			<s:textfield name="loginBean.username" label="User Name" />
 			<s:password name="loginBean.password" label="Password" />
 			<s:submit value="Submit" />

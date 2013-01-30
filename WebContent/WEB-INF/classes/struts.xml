@@ -3,19 +3,18 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-  <constant name="struts.action.extension" value="do"/> 
+	<constant name="struts.action.extension" value="do" />
 
 	<package name="default" extends="struts-default">
 		<interceptors>
-			<interceptor class="vaannila.interceptor.LoginInterceptor"
+			<interceptor class="com.vaannila.interceptor.LoginInterceptor"
 				name="loginInterceptor">
 			</interceptor>
-			<interceptor-stack name="loggingStack">
-				<interceptor-ref name="mylogging" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-		<default-interceptor-ref name="logginStack"></default-interceptor-ref>
 		<global-results>
 			<result name="securityerror">/WEB-INF/views/master_error.jsp</result>
 			<result name="error">/WEB-INF/views/master_error.jsp</result>

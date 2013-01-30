@@ -15,11 +15,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 public class LoginInterceptor extends AbstractInterceptor implements
   StrutsStatics {
 
- /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-private static final Log log = LogFactory.getLog(LoginInterceptor.class);
+ private static final Log log = LogFactory.getLog(LoginInterceptor.class);
  private static final String USER_HANDLE = "loggedInUser";
  private static final String LOGIN_ATTEMPT = "loginAttempt";
 
@@ -29,6 +25,7 @@ private static final Log log = LogFactory.getLog(LoginInterceptor.class);
  }
 
  public void destroy() {
+	 
  }
 
  public String intercept(ActionInvocation invocation) throws Exception {
