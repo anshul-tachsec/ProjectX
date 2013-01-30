@@ -1,8 +1,5 @@
 package vaannila.action;
 
-import java.util.Date;
-import vaannila.helper.PasswordHelper;
-import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
