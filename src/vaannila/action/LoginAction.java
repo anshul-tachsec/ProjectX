@@ -1,16 +1,26 @@
 package vaannila.action;
 
+import java.util.Map;
+
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import vaannila.getset.Login;
 import vaannila.DAO.LoginDAO;
-public class LoginAction extends ActionSupport{
+public class LoginAction extends ActionSupport implements SessionAware{
 
 	/**
 	 * 
 	 */
+	// For SessionAware
+	  Map<String, Object> session;
+	  @Override
+	  public void setSession(Map<String, Object> session) {
+	    this.session = session;
+	  }
+	  
 	private static final long serialVersionUID = 1L;
 	public Login loginBean;
 	public Login getLoginBean(){
@@ -25,48 +35,48 @@ public class LoginAction extends ActionSupport{
 		this.loginBean = login;
 	}
 	public String execute() throws Exception{
-		
+
 		System.out.println("In Login Action");
-		System.out.println("before hashin: "+loginBean.getPassword());
 		String domain="";
-		System.out.println("In Login Action");
-		System.out.println("hash hashin: "+loginBean.getPassword());
 		if(loginBean.getUsername().contains("@") && loginBean.getUsername().contains(".")){
-			String[] EMAIL = loginBean.getUsername().split("@");
-			System.out.println(EMAIL[0]);
-			loginBean.setUsername(EMAIL[0]);
-			domain=EMAIL[1].split("\\.")[0];
-			System.out.println(domain);		
+			String[] email = loginBean.getUsername().split("@");
+			loginBean.setUsername(email[0]);
+			domain=email[1].split("\\.")[0];
+			loginBean.setDomain(domain);
+
 		}
 		else{
 			return "login_error";
 		}		//string split
-		LoginDAO.validateLogin(loginBean,domain);
+		LoginDAO.validateLogin(loginBean);
 		loginBean.getPrimaryPrivilege();
 		try{
 			if(loginBean.getPrimaryPrivilege().equals("pt")){
-				  ServletActionContext.getRequest().getSession().setAttribute("loggedInUser", loginBean.getUsername());
-System.out.println("in pt");
+				session.put("username", loginBean.getUsername());
+				session.put("domain", loginBean.getDomain());
+				System.out.println("in pt");
 				return "login_success_pt";
 			}
 			else if(loginBean.getPrimaryPrivilege().equals("hr")){
-				  ServletActionContext.getRequest().getSession().setAttribute("loggedInUser", loginBean.getUsername());
+				session.put("username", loginBean.getUsername());
+				session.put("domain", loginBean.getDomain());
 				System.out.println("in hr");
 				return "login_success_hr";
 			}
 			else if(loginBean.getPrimaryPrivilege().equals("fo")){
-				  ServletActionContext.getRequest().getSession().setAttribute("loggedInUser", loginBean.getUsername());
+				session.put("username", loginBean.getUsername());
+				session.put("domain", loginBean.getDomain());
 				System.out.println("in fo");
 				//				test
 				return "login_success_fo";
 			}
 			else if(loginBean.getPrimaryPrivilege().equals("bi")){
-				  ServletActionContext.getRequest().getSession().setAttribute("loggedInUser", loginBean.getUsername());
+				session.put("username", loginBean.getUsername());
+				session.put("domain", loginBean.getDomain());
 				System.out.println("in bi");
 				return "login_success_bi";
 			}
 			else if(loginBean.getPrimaryPrivilege().equals("er")){
-				  ServletActionContext.getRequest().getSession().setAttribute("loggedInUser", loginBean.getUsername());
 				System.out.println("Login Error no_privilege found");
 				return "login_error_nopvg";
 			}

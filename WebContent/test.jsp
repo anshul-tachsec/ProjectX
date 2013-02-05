@@ -11,15 +11,11 @@
 <meta http-equiv="description" content="This is my page">
 
 
-<link rel="stylesheet" href="css/flora.tabs.css" type="text/css"
+<link rel="stylesheet" href="flora.tabs.css" type="text/css"
 	media="screen" title="Flora Tabs">
-<script type="text/javascript" src="js/jquery-1.2.6.js"></script>
-<script type="text/javascript" src="js/ui.core.js"></script>
-<script type="text/javascript" src="js/ui.tabs.js"></script>
-<link href="css/smoothness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
-<script src="js/jquery-1.9.0.js"></script>
-<script src="js/jquery-ui-1.10.0.custom.js"></script>
-
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript" src="ui.core.js"></script>
+<script type="text/javascript" src="ui.tabs.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 

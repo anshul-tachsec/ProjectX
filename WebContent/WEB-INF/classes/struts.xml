@@ -6,17 +6,16 @@
 	<constant name="struts.action.extension" value="do" />
 
 	<package name="default" extends="struts-default">
-		<interceptors>
-			<interceptor class="com.vaannila.interceptor.LoginInterceptor"
-				name="loginInterceptor">
-			</interceptor>
-			<interceptor-stack name="loginStack">
-				<interceptor-ref name="loginInterceptor" />
-				<interceptor-ref name="defaultStack" />
-			</interceptor-stack>
-		</interceptors>
+<!-- 		<interceptors> -->
+<!-- 			<interceptor class="com.vaannila.interceptor.LoginInterceptor" -->
+<!-- 				name="loginInterceptor"> -->
+<!-- 			</interceptor> -->
+<!-- 			<interceptor-stack name="loginStack"> -->
+<!-- 				<interceptor-ref name="loginInterceptor" /> -->
+<!-- 				<interceptor-ref name="defaultStack" /> -->
+<!-- 			</interceptor-stack> -->
+<!-- 		</interceptors> -->
 		<global-results>
-			<result name="securityerror">/WEB-INF/views/master_error.jsp</result>
 			<result name="error">/WEB-INF/views/master_error.jsp</result>
 			<result name="login">/login.jsp</result>
 		</global-results>
@@ -57,6 +56,12 @@
 			<result name="patient_login" type="dispatcher">/WEB-INF/views/patient_login_success.jsp
 			</result>
 			<result name="login_error" type="dispatcher">/WEB-INF/views/login_error.jsp
+			</result>
+		</action>
+		<action name="PatientFormAction" class="vaannila.action.PatientFormAction">
+			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_form_success.jsp
+			</result>
+			<result name="error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
 	</package>

@@ -8,7 +8,15 @@ public class Login {
 	private String username;
 	private String password;
 	private String primaryPrivilege;
+	private String domain;
+	
 
+	public String getDomain() {
+		return domain;
+	}
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
 	public String getPrimaryPrivilege() {
 //		System.out.println("getPrimaryPrivilege: "+primaryPrivilege);
 		return primaryPrivilege;
@@ -47,4 +55,5 @@ public class Login {
 				(PasswordHelper.computeHash(password));
 			
 	}
+	
 }
