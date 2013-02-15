@@ -16,16 +16,16 @@
 <!-- 			</interceptor-stack> -->
 <!-- 		</interceptors> -->
 		<global-results>
-			<result name="error">/WEB-INF/views/master_error.jsp</result>
+			<result name="master_error">/WEB-INF/views/master_error.jsp</result>
 			<result name="login">/login.jsp</result>
 		</global-results>
 
 		<global-exception-mappings>
 			<exception-mapping
 				exception="org.apache.struts.register.exceptions.SecurityBreachException"
-				result="error" />
+				result="master_error" />
 			<exception-mapping exception="java.lang.Exception"
-				result="error" />
+				result="master_error" />
 		</global-exception-mappings>
 
 
@@ -44,7 +44,7 @@
 			</result>
 			<result name="login_error" type="dispatcher">/WEB-INF/views/login_error.jsp
 			</result>
-			<result name="error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
 		<action name="LogoutAction" class="vaannila.action.LogoutAction">
@@ -59,9 +59,16 @@
 			</result>
 		</action>
 		<action name="PatientFormAction" class="vaannila.action.PatientFormAction">
-			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_form_success.jsp
+			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
 			</result>
-			<result name="error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		
+		<action name="PatientFormActionUpdate" class="vaannila.action.PatientFormActionUpdate">
+			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
 	</package>

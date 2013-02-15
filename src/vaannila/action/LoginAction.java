@@ -2,7 +2,6 @@ package vaannila.action;
 
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -51,6 +50,9 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		LoginDAO.validateLogin(loginBean);
 		loginBean.getPrimaryPrivilege();
 		try{
+			if(loginBean.getPrimaryPrivilege()==null){
+				return "login_error";
+			}
 			if(loginBean.getPrimaryPrivilege().equals("pt")){
 				session.put("username", loginBean.getUsername());
 				session.put("domain", loginBean.getDomain());
@@ -81,7 +83,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 				return "login_error_nopvg";
 			}
 			else{
-				return "login_error";
+				return "master_error";
 			}
 
 		}

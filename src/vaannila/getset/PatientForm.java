@@ -63,7 +63,7 @@ public class PatientForm {
 	private String patientCoInsurance;
 	private String patientDeductible;
 	private String thirdPartyPayer;
-	private String scripequired;
+	private String scriptRequired;
 	private String paymentNotes;
 	private String patientPhoto;
 	private String treatmentDate;
@@ -73,6 +73,7 @@ public class PatientForm {
 	private String emailConsent;
 	private String bodyPart;
 	private String additionalInformationNotes;
+	private int patientID;
 	public String getLastName() {
 		return lastName;
 	}
@@ -445,12 +446,7 @@ public class PatientForm {
 	public void setThirdPartyPayer(String thirdPartyPayer) {
 		this.thirdPartyPayer = thirdPartyPayer;
 	}
-	public String getScripequired() {
-		return scripequired;
-	}
-	public void setScripequired(String scripequired) {
-		this.scripequired = scripequired;
-	}
+	
 	public String getPaymentNotes() {
 		return paymentNotes;
 	}
@@ -504,6 +500,19 @@ public class PatientForm {
 	}
 	public void setAdditionalInformationNotes(String additionalInformationNotes) {
 		this.additionalInformationNotes = additionalInformationNotes;
+	}
+	public int getPatientID() {
+		return patientID;
+	}
+	public void setPatientID(int patientID) {
+		this.patientID = patientID;
+	}
+	
+	public String getScriptRequired() {
+		return scriptRequired;
+	}
+	public void setScriptRequired(String scriptRequired) {
+		this.scriptRequired = scriptRequired;
 	}
 
 

@@ -6,13 +6,14 @@ package vaannila.DAO;
 //import java.sql.PreparedStatement;
 //import java.sql.ResultSet;
 
+
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Map;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.ResultSetImpl;
-
 import vaannila.getset.Login;
 import vaannila.getset.PatientForm;
 
@@ -235,7 +236,7 @@ public class LoginDAO {
 					+ "','"
 					+ patientFormBean.getThirdPartyPayer()
 					+ "','"
-					+ patientFormBean.getScripequired()
+					+ patientFormBean.getScriptRequired()
 					+ "','"
 					+ patientFormBean.getPaymentNotes()
 					+ "','"
@@ -244,9 +245,168 @@ public class LoginDAO {
 			PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
 			System.out.println(sql);
 			ps.executeUpdate();
+			/*
+			 * to test last_insert_id functionality.
+			 */
+			//Thread.sleep(100000);
+			/*
+			 * for retrieving last updated Primary key;
+			 */
+			String check = "SELECT LAST_INSERT_ID()";
+			ps.execute(check);
+			ResultSet rs = ps.getResultSet();
+			rs.next();
+			patientFormBean.setPatientID(rs.getInt(1));			
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 
 	}
+	public static void patientEntryUpdate(PatientForm patientFormBean,
+			@SuppressWarnings("rawtypes") Map m) {
+		System.out.println("In patientEntryUpdate");
+
+		try{
+			Connection conn = null;
+			String url = "jdbc:mysql://127.0.0.1:3306/";
+			String driver = "com.mysql.jdbc.Driver";
+			String userName = "root";
+			String pass = "tachsec";
+			System.out.println("post db initialize in patient EntryUPdate");
+			System.out.println("Domain Name DAO: "+m.get("domain"));
+			System.out.println();
+			/*domain contains name of database.	
+			 * 
+			 */
+			try {
+				System.out.println("test "+patientFormBean.getPatientID());
+				Class.forName(driver).newInstance();
+				conn = (Connection) DriverManager.getConnection(url + m.get("domain"), userName, pass);
+				System.out.println("after connection");
+			} catch (Exception e) {
+				System.out.println("exception " + e);
+			}
+			String sql = "UPDATE patient_form set last_name ='" +patientFormBean.getLastName()+ "'" +
+					",first_name='" +patientFormBean.getFirstName()+ "'" +
+					",age='" +patientFormBean.getAge()+ "'" +
+					",gender='" +patientFormBean.getGender()+ "'" +
+					",marital_status ='" +patientFormBean.getMaritalStatus()+ "'" +
+					",emp_status='" +patientFormBean.getEmpStatus()+ "'" +
+					",treating_provider='" +patientFormBean.getTreatingProvider()+ "'" +
+					",referring_provider='" +patientFormBean.getReferringProvider()+ "'" +
+					",relation_guarantor='" +patientFormBean.getRelationGuarantor()+ "'" +
+					",DOB='" +patientFormBean.getPatientDOB()+ "'" +
+					",race='" +patientFormBean.getPatientRace()+ "'" +
+					",ethnicity='" +patientFormBean.getPatientEthinicity()+ "'," +
+					"language='" +patientFormBean.getPatientLanguage()+ "'" +
+					",mothers_maiden='" +patientFormBean.getMothersMaiden()+ "'" +
+					",SSN='" +patientFormBean.getPatientSSN()+ "'" +
+					",DOO='" +patientFormBean.getPatientDOO()+ "'" +
+					",res_street='" +patientFormBean.getResidentialStreet()+ "'" +
+					",res_city='" +patientFormBean.getResidentialCity()+ "'" +
+					",res_state='" +patientFormBean.getResidentialState()+ "'" +
+					",res_zip='" +patientFormBean.getResidentialZipcode()+ "'" +
+					",mail_street='" +patientFormBean.getMailStreet()+ "'" +
+					",mail_city='" +patientFormBean.getMailCity()+ "'," +
+					"mail_state='" +patientFormBean.getMailState()+ "'" +
+					",mail_zip='" +patientFormBean.getMailZipcode()+ "'" +
+					",last_visit='" +patientFormBean.getLastVisitDate()+ "'" +
+					",home_ph='" +patientFormBean.getHomePhone()+ "'" +
+					",work_ph='" +patientFormBean.getWorkPhone()+ "'" +
+					",cell_ph='" +patientFormBean.getCellPhone()+ "'" +
+					",email='" +patientFormBean.getPatientEmail()+ "'" +
+					",recall_method='" +patientFormBean.getReminderMethod()+ "'" +
+					",free_text_main='" +patientFormBean.getDemographicsNotes()+ "'," +
+					"conf_status='" +patientFormBean.getConfidentialStatus()+ "'" +
+					",conf_set_by='" +patientFormBean.getConfidentialSetBy()+ "'" +
+					",conf_date='" +patientFormBean.getConfidentialDate()+ "'" +
+					",treatment_date='" +patientFormBean.getTreatmentDate()+ "'" +
+					",onset_date='" +patientFormBean.getOnsetDate()+ "'" +
+					",discharge_date='" +patientFormBean.getDischargeDate()+ "'" +
+					",facility_name='" +patientFormBean.getFacilityName()+ "'" +
+					",email_consent='" +patientFormBean.getEmailConsent()+ "'," +
+					"body_part='" +patientFormBean.getBodyPart()+ "'" +
+					",free_text_additional_info='" +patientFormBean.getAdditionalInformationNotes()+ "'" +
+					",patient_consent='" +patientFormBean.getPatientConsent()+ "'" +
+					",consent_date_set='" +patientFormBean.getConsentDateSet()+ "'" +
+					",consent_notes='" +patientFormBean.getConsentNotes()+ "'," +
+					"insurance_provider='" +patientFormBean.getPrimaryInsuranceProvider()+ "'" +
+					",insurance_id_no='" +patientFormBean.getPrimaryInsuranceIdNumber()+ "'" +
+					",insurance_group_id_no='" +patientFormBean.getPrimaryGroupIdNumber()+ "'" +
+					",policy_provider_name='" +patientFormBean.getPrimaryPolicyProviderName()+ "'" +
+					",policy_provider_DOB='" +patientFormBean.getPrimaryProviderDOB()+ "'" +
+					",ailment='" +patientFormBean.getPatientAilment()+ "'" +
+					",secondary_insurance='" +patientFormBean.getSecondaryInsurance()+ "'" +
+					",secondary_insurance_provider='" +patientFormBean.getSecondaryInsuranceProvider()+ "'," +
+					"secondary_insurance_id_no='" +patientFormBean.getSecondaryInsuranceIdNumber()+ "'" +
+					",secondary_insurance_group_no='" +patientFormBean.getSecondaryGroupIdNumber()+ "'" +
+					",secondary_policy_provider_name='" +patientFormBean.getSecondaryPolicyProviderName()+ "'," +
+					"secondary_policy_provider_DOB='" +patientFormBean.getSecondaryProviderDOB()+ "'" +
+					",tertiary_insurance='" +patientFormBean.getTertiaryInsurance()+ "'," +
+					"tertiary_insurance_provider='" +patientFormBean.getTertiaryInsuranceProvider()+ "'" +
+					",tertiary_insurance_id_no='" +patientFormBean.getTertiaryInsuranceIdNumber()+ "'" +
+					",tertiary_insurance_group_no='" +patientFormBean.getTertiaryGroupIdNumber()+ "'," +
+					"tertiary_policy_provider_name='" +patientFormBean.getTertiaryPolicyProviderName()+ "'" +
+					",tertiary_policy_provider_DOB='" +patientFormBean.getTertiaryProviderDOB()+ "'," +
+					"insurance_ph_number='" +patientFormBean.getInsurancePhoneNumber()+ "'" +
+					",authorised_visits='" +patientFormBean.getAuthorisedVisits()+ "'" +
+					",validity_date='" +patientFormBean.getValidityDates()+ "'" +
+					",copay='" +patientFormBean.getPatientCoPay()+ "'" +
+					",coinsurance='" +patientFormBean.getPatientCoInsurance()+ "'" +
+					",deductible='" +patientFormBean.getPatientDeductible()+ "'" +
+					",third_party_payer='" +patientFormBean.getThirdPartyPayer()+ "'," +
+					"script_required='" +patientFormBean.getScriptRequired()+ "'" +
+					",big_free_text='" +patientFormBean.getPaymentNotes()+ "'" +
+					",picture='" +patientFormBean.getPatientPhoto()+ "'"+ 
+					"where patient_no='"+patientFormBean.getPatientID()+ "'";
+			PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
+			System.out.println(sql);
+			ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}		
+	}
+	@SuppressWarnings("rawtypes")
+	public static void retrievePatientForm(PatientForm patientFormBean, Map m) {
+		System.out.println("In retrieve patient");
+
+		try{
+
+			Statement stmt = null;
+			ResultSet rs = null;
+			Connection conn = null;
+			String url = "jdbc:mysql://127.0.0.1:3306/";
+			String driver = "com.mysql.jdbc.Driver";
+			String userName = "root";
+			String pass = "tachsec";
+			System.out.println("post db initialize in patient EntryUPdate");
+			System.out.println("Domain Name DAO: "+m.get("domain"));
+			System.out.println();
+			/*domain contains name of database.	
+			 * 
+			 */
+			try {
+				System.out.println("test "+patientFormBean.getPatientID());
+				Class.forName(driver).newInstance();
+				conn = (Connection) DriverManager.getConnection(url + m.get("domain"), userName, pass);
+				System.out.println("after connection");
+			} catch (Exception e) {
+				System.out.println("exception " + e);
+			}
+
+			stmt = conn.createStatement();
+			String check = "SELECT * FROM patient_form WHERE patient_no="+patientFormBean.getPatientID();
+			stmt.execute(check);
+			rs = stmt.getResultSet();
+			rs.next();
+			patientFormBean.g
+			//				document.setContentType(rs.getString("ContentType"));
+			//				document.setFileSize(rs.getInt("FileSize"));
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}		
+	}
 }
+

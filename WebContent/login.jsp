@@ -29,7 +29,6 @@
 
 	<div style="float: left;">
 		<h3>Patient Login</h3>
-		-
 		<s:form action="PatientAction" method="post">
 			<s:textfield name="patientLoginBean.SSN" label="SSN" />
 			<s:textfield name="patientLoginBean.DOB" label="DOB" />
