@@ -105,7 +105,7 @@ body {
 					<li><a href="#additionalInfo">Additional Information</a></li>
 				</ul>
 				<div id="demographics">
-					<s:form action="PatientFormActionUpdate" method="post">
+					<s:form action="PatientFormActionUpdateDemographicsTab" method="post">
 						<input value="${patientFormBean.patientID }" style="display: none"
 							name="patientFormBean.patientID"></input>
 						<!-- 				main table -->
@@ -329,7 +329,7 @@ body {
 
 				<div id="paymentInfo">
 
-					<s:form action="PatientFormActionUpdate" method="post">
+					<s:form action="PatientFormActionUpdatePaymentTab" method="post">
 						<input value="${patientFormBean.patientID }" style="display: none"
 							name="patientFormBean.patientID"></input>
 
@@ -573,7 +573,7 @@ body {
 				<!-- 				Third tab in new record -->
 				<div id="additionalInfo">
 
-					<s:form action="PatientFormActionUpdate" method="post">
+					<s:form action="PatientFormActionUpdateAdditionalTab" method="post">
 						<input value="${patientFormBean.patientID }" style="display: none"
 							name="patientFormBean.patientID"></input>
 

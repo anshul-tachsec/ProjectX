@@ -24,9 +24,7 @@
 	$(function() {
 
 		$("#billerMode").button();
-		$("#logout").button().click(function() {
-			window.location.href = "/LogoutAction.do";
-		});
+		$("#logout");
 		var tabs = $("#tabs, #subtabs").tabs();
 		tabs.find(".ui-tabs-nav").sortable({
 			axis : "x",
@@ -85,10 +83,8 @@ body {
 </style>
 </head>
 <body>
-	<button id="billerMode" >Biller Mode</button>
+	<button id="billerMode">Biller Mode</button>
 	<button id="logout">LogOut</button>
-	<!-- 		<a href="LogoutAction.action" class="logout" button id="logout">Logout</a> -->
-
 	<div id="tabs">
 		<ul>
 			<li><a href="#ptSchedule"><span>PT Schedule</span></a></li>
@@ -109,7 +105,7 @@ body {
 					<li><a href="#advancedSearch">Advanced Search</a></li>
 				</ul>
 				<div id="simpleSearch">
-					<s:form action="PatientFormAction" method="post">
+					<s:form action="PatientFormActionSimpleSearch" method="post">
 						<!-- 				main table -->
 						<table cellspacing="0" cellpadding="5">
 							<tr>
@@ -126,8 +122,8 @@ body {
 												tabindex="1" size="25"></td>
 										</tr>
 										<tr>
-											<td width="15%">D.O.B.</td>
-											<td><input type="text" name="patientFormBean.patientDOB"
+											<td width="15%">Patient ID</td>
+											<td><input type="text" name="patientFormBean.patientID"
 												tabindex="2" size="25"></td>
 										</tr>
 										<tr>
@@ -175,7 +171,7 @@ body {
 							<li><a href="#additionalInfo">Additional Information</a></li>
 						</ul>
 						<div id="demographics">
-							<s:form action="PatientFormAction" method="post">
+							<s:form action="PatientFormActionAdvancedSearch" method="post">
 								<!-- 				main table -->
 								<table cellspacing="0" cellpadding="5">
 									<tr>
@@ -372,7 +368,7 @@ body {
 						</div>
 
 						<div id="paymentInfo">
-							<s:form action="PatientFormAction" method="post">
+							<s:form action="PatientFormActionAdvancedSearch" method="post">
 								<!-- 				main table -->
 								<table cellspacing="0" cellpadding="5">
 									<tr>
@@ -587,7 +583,7 @@ body {
 
 						<!-- 				Third tab in new record -->
 						<div id="additionalInfo">
-							<s:form action="PatientFormAction" method="post">
+							<s:form action="PatientFormActionAdvancedSearch" method="post">
 								<!-- 				main table -->
 								<table cellspacing="0" cellpadding="5">
 									<tr>
@@ -688,7 +684,7 @@ body {
 					<li><a href="#additionalInfo">Additional Information</a></li>
 				</ul>
 				<div id="demographics">
-					<s:form action="PatientFormAction" method="post">
+					<s:form action="PatientFormActionDemographicsTab" method="post">
 						<!-- 				main table -->
 						<table cellspacing="0" cellpadding="5">
 							<tr>
@@ -880,7 +876,7 @@ body {
 				</div>
 
 				<div id="paymentInfo">
-					<s:form action="PatientFormAction" method="post">
+					<s:form action="PatientFormActionPaymentTab" method="post">
 						<!-- 				main table -->
 						<table cellspacing="0" cellpadding="5">
 							<tr>
@@ -1088,7 +1084,7 @@ body {
 
 				<!-- 				Third tab in new record -->
 				<div id="additionalInfo">
-					<s:form action="PatientFormAction" method="post">
+					<s:form action="PatientFormActionAdditionalTab" method="post">
 						<!-- 				main table -->
 						<table cellspacing="0" cellpadding="5">
 							<tr>

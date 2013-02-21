@@ -9,7 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import vaannila.DAO.LoginDAO;
 import vaannila.getset.PatientForm;
-public class PatientFormActionUpdate extends ActionSupport implements SessionAware{ 
+public class PatientFormActionAdditionalTab extends ActionSupport implements SessionAware{ 
 
 	@SuppressWarnings("rawtypes")
 	Map m;  
@@ -23,7 +23,8 @@ public class PatientFormActionUpdate extends ActionSupport implements SessionAwa
 	public PatientForm getPatientFormBean(){
 		return patientFormBean;
 	}
-	public PatientFormActionUpdate(){
+	public PatientFormActionAdditionalTab()
+	{
 		this.patientFormBean=new PatientForm();
 	}
 	public void setPatientFormBean(PatientForm patientForm) {
@@ -31,13 +32,12 @@ public class PatientFormActionUpdate extends ActionSupport implements SessionAwa
 		this.patientFormBean = patientForm;
 	}
 	public String execute() throws Exception{
-		System.out.println("In PatientFormAction");
+		System.out.println("In PatientFormAction AdditionalTab");
 
 		System.out.println("username via session"+m.get("username"));	
 		System.out.println("domain via session"+m.get("domain"));
 
-		LoginDAO.patientEntryUpdate(patientFormBean , m );
-		LoginDAO.retrievePatientForm(patientFormBean, m);
+		LoginDAO.patientEntryAdditionalTab(patientFormBean , m );
 		return "patient_form_success";
 	}
 }
