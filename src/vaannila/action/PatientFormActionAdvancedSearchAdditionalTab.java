@@ -15,7 +15,7 @@ import vaannila.getset.PatientFormSearch;
 import com.opensymphony.xwork2.ActionSupport;
 
 
-public class PatientFormActionSimpleSearch extends ActionSupport implements SessionAware{
+public class PatientFormActionAdvancedSearchAdditionalTab extends ActionSupport implements SessionAware{
 
 	@SuppressWarnings("rawtypes")
 	Map m;  
@@ -26,18 +26,22 @@ public class PatientFormActionSimpleSearch extends ActionSupport implements Sess
 	}
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	ArrayList<PatientFormSearch> al=new ArrayList();
 	public PatientFormSearch patientFormSearch;
 
+	@SuppressWarnings("rawtypes")
 	public ArrayList getAl() {
 		return al;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void setAl(ArrayList al) {
 		this.al = al;
 	}
 
 
+	@SuppressWarnings("rawtypes")
 	public String execute()throws Exception
 	{
 		Statement stmt = null;
@@ -65,55 +69,37 @@ public class PatientFormActionSimpleSearch extends ActionSupport implements Sess
 
 		try{
 			stmt = conn.createStatement();
-	
+
 
 			String check1="SELECT * FROM patient_form WHERE (patient_no = "+patientFormSearch.getPatientID()+"";
-			String check2;
-			String check3;
-			String check4;
-			String check5;
-			String check6;
-					
-			if(patientFormSearch.getLastName().toCharArray().length!=0 ){
-				 check2=" or last_name = '"+patientFormSearch.getLastName()+"'";
-				 System.out.println("last"+patientFormSearch.getLastName());
-			}
-			else{
-				check2="";
-			}
-			if(patientFormSearch.getFirstName().toCharArray().length!=0 ){
-				 check3=" or first_name = '"+patientFormSearch.getFirstName()+"'";
-				 System.out.println("first"+patientFormSearch.getFirstName());
-			}
-			else{
-				check3="";
-			}
-			
-			if(patientFormSearch.getPatientDOB()!=null ){
-				 check4=" or DOB = '"+patientFormSearch.getPatientDOB()+"'";
-				 System.out.println("dob"+patientFormSearch.getPatientDOB());
-			}
-			else{
-				 check4="";
-			}
-			if(patientFormSearch.getCellPhone().toCharArray().length!=0 ){
-				check5=" or cell_ph = '"+patientFormSearch.getCellPhone()+"'";
-				 System.out.println("cell"+patientFormSearch.getCellPhone());
-			}
-			else{
-				check5="";
-			}
-			if(patientFormSearch.getPatientEmail()!=null ){
-				 check6=" or email = '"+patientFormSearch.getPatientEmail()+"'";
-				 System.out.println("email"+patientFormSearch.getPatientEmail());
-			}
-			else{
-				 check6="";
-			}
+			String c30;
+			String c31,c32,c33,c34,c35,c36,c37,c38,c39;// forgot c45
+
+
+			if( patientFormSearch!=null && patientFormSearch.getConfidentialStatus().toCharArray().length!=0){ c30=" or  conf_status= '"+patientFormSearch.getConfidentialStatus()+"'"; } else{ c30=""; }
+
+			if( patientFormSearch.getConfidentialSetBy().toCharArray().length!=0 && patientFormSearch.getConfidentialSetBy() !=null){ c31=" or  conf_set_by= '"+patientFormSearch.getConfidentialSetBy()+"'"; } else{ c31=""; }
+
+			if( patientFormSearch.getConfidentialDate().toCharArray().length!=0 && patientFormSearch.getConfidentialDate() !=null){ c32=" or  conf_date= '"+patientFormSearch.getConfidentialDate()+"'"; } else{ c32=""; }
+
+			if( patientFormSearch.getTreatmentDate().toCharArray().length!=0 && patientFormSearch.getTreatmentDate() !=null){ c33=" or  treatment_date= '"+patientFormSearch.getTreatmentDate()+"'"; } else{ c33=""; }
+
+			if( patientFormSearch.getOnsetDate().toCharArray().length!=0 && patientFormSearch.getOnsetDate() !=null){ c34=" or  onset_date= '"+patientFormSearch.getOnsetDate()+"'"; } else{ c34=""; }
+
+			if( patientFormSearch.getDischargeDate().toCharArray().length!=0 && patientFormSearch.getDischargeDate() !=null){ c35=" or  discharge_date= '"+patientFormSearch.getDischargeDate()+"'"; } else{ c35=""; }
+
+			if( patientFormSearch.getFacilityName().toCharArray().length!=0 && patientFormSearch.getFacilityName() !=null){ c36=" or  facility_name= '"+patientFormSearch.getFacilityName()+"'"; } else{ c36=""; }
+
+			if( patientFormSearch.getEmailConsent().toCharArray().length!=0 && patientFormSearch.getEmailConsent() !=null){ c37=" or  email_consent= '"+patientFormSearch.getEmailConsent()+"'"; } else{ c37=""; }
+
+			if( patientFormSearch.getBodyPart().toCharArray().length!=0 && patientFormSearch.getBodyPart() !=null){ c38=" or  body_part= '"+patientFormSearch.getBodyPart()+"'"; } else{ c38=""; }
+
+			if( patientFormSearch.getAdditionalInformationNotes().toCharArray().length!=0 && patientFormSearch.getAdditionalInformationNotes() !=null){ c39=" or  free_text_additional_info= '"+patientFormSearch.getAdditionalInformationNotes()+"'"; } else{ c39=""; }
 			String check7=")";
-			String check = ""+check1+check2+check3+check4+check5+check6+check7+"";
-		
-			
+			String check = ""+check1+c30+
+					c31+c32+c33+c34+c35+c36+c37+c38+c39+check7+"";
+
+
 
 			System.out.println(check);
 			stmt.execute(check);
@@ -142,7 +128,7 @@ public class PatientFormActionSimpleSearch extends ActionSupport implements Sess
 			e.printStackTrace();
 		}
 
-		return "patient_form_simple_search";
+		return "patient_form_advanced_search";
 	}
 
 	public PatientFormSearch getPatientFormSearch() {

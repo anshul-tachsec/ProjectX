@@ -6,15 +6,15 @@
 	<constant name="struts.action.extension" value="do" />
 
 	<package name="default" extends="struts-default">
-<!-- 		<interceptors> -->
-<!-- 			<interceptor class="com.vaannila.interceptor.LoginInterceptor" -->
-<!-- 				name="loginInterceptor"> -->
-<!-- 			</interceptor> -->
-<!-- 			<interceptor-stack name="loginStack"> -->
-<!-- 				<interceptor-ref name="loginInterceptor" /> -->
-<!-- 				<interceptor-ref name="defaultStack" /> -->
-<!-- 			</interceptor-stack> -->
-<!-- 		</interceptors> -->
+		<!-- <interceptors> -->
+		<!-- <interceptor class="com.vaannila.interceptor.LoginInterceptor" -->
+		<!-- name="loginInterceptor"> -->
+		<!-- </interceptor> -->
+		<!-- <interceptor-stack name="loginStack"> -->
+		<!-- <interceptor-ref name="loginInterceptor" /> -->
+		<!-- <interceptor-ref name="defaultStack" /> -->
+		<!-- </interceptor-stack> -->
+		<!-- </interceptors> -->
 		<global-results>
 			<result name="master_error">/WEB-INF/views/master_error.jsp</result>
 			<result name="login">/login.jsp</result>
@@ -48,7 +48,7 @@
 			</result>
 		</action>
 		<action name="LogoutAction" class="vaannila.action.LogoutAction">
-			<result name="logout_success" >/WEB-INF/views/logout_success.jsp
+			<result name="logout_success">/WEB-INF/views/logout_success.jsp
 			</result>
 		</action>
 
@@ -64,57 +64,79 @@
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-		
+
 		<action name="PatientFormActionPaymentTab" class="vaannila.action.PatientFormActionPaymentTab">
 			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-		
+
 		<action name="PatientFormActionAdditionalTab" class="vaannila.action.PatientFormActionAdditionalTab">
 			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-		
-		<action name="PatientFormActionUpdateDemographicsTab" 
-		class="vaannila.action.PatientFormActionUpdateDemographicsTab">
-			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
-			</result>
-			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
-			</result>
-		</action>
-	
-	<action name="PatientFormActionUpdatePaymentTab" 
-		class="vaannila.action.PatientFormActionUpdatePaymentTab">
-			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
-			</result>
-			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
-			</result>
-		</action>
-	
-	<action name="PatientFormActionUpdateAdditionalTab" 
-		class="vaannila.action.PatientFormActionUpdateAdditionalTab">
+
+		<action name="PatientFormActionUpdateDemographicsTab"
+			class="vaannila.action.PatientFormActionUpdateDemographicsTab">
 			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
 
-<action name="PatientFormActionSimpleSearch" class="vaannila.action.PatientFormActionSimpleSearch">
+		<action name="PatientFormActionUpdatePaymentTab"
+			class="vaannila.action.PatientFormActionUpdatePaymentTab">
 			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-		<action name="PatientFormActionAdvancedSearch" class="vaannila.action.PatientFormActionAdvancedSearch">
+
+		<action name="PatientFormActionUpdateAdditionalTab"
+			class="vaannila.action.PatientFormActionUpdateAdditionalTab">
 			<result name="patient_form_success" type="dispatcher">/WEB-INF/views/patient_personal.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-			
+
+		<action name="PatientFormActionSimpleSearch" class="vaannila.action.PatientFormActionSimpleSearch">
+			<result name="patient_form_simple_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+
+		<action name="PatientFormActionAdvancedSearchDemographicsTab" class="vaannila.action.PatientFormActionAdvancedSearchDemographicsTab">
+			<result name="patient_form_advanced_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		
+		<action name="PatientFormActionAdvancedSearchPaymentTab" class="vaannila.action.PatientFormActionAdvancedSearchPaymentTab">
+			<result name="patient_form_advanced_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		
+		<action name="PatientFormActionAdvancedSearchAdditionalTab" class="vaannila.action.PatientFormActionAdvancedSearchAdditionalTab">
+			<result name="patient_form_advanced_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+
+		<action name="PatientFormActionSearchHyperlink" class="vaannila.action.PatientFormActionSearchHyperlink">
+			<result name="patient_form_search_hyperlink" type="dispatcher">/WEB-INF/views/patient_personal.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+
 	</package>
 </struts>

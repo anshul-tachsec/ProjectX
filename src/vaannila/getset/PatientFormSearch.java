@@ -1,6 +1,5 @@
 package vaannila.getset;
-
-public class PatientFormSearch {
+public class PatientFormSearch{
 	private String lastName;
 	private String firstName;
 	private String age;
@@ -446,7 +445,7 @@ public class PatientFormSearch {
 	public void setThirdPartyPayer(String thirdPartyPayer) {
 		this.thirdPartyPayer = thirdPartyPayer;
 	}
-	
+
 	public String getPaymentNotes() {
 		return paymentNotes;
 	}
@@ -507,7 +506,7 @@ public class PatientFormSearch {
 	public void setPatientID(int string) {
 		this.patientID = string;
 	}
-	
+
 	public String getScriptRequired() {
 		return scriptRequired;
 	}
