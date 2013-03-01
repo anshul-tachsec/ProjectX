@@ -110,21 +110,30 @@
 			</result>
 		</action>
 
-		<action name="PatientFormActionAdvancedSearchDemographicsTab" class="vaannila.action.PatientFormActionAdvancedSearchDemographicsTab">
+		<action name="EmployeeFormActionSimpleSearch" class="vaannila.action.EmployeeFormActionSimpleSearch">
+			<result name="employee_form_simple_search" type="dispatcher">/WEB-INF/views/login_success_hr.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		<action name="PatientFormActionAdvancedSearchDemographicsTab"
+			class="vaannila.action.PatientFormActionAdvancedSearchDemographicsTab">
 			<result name="patient_form_advanced_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-		
-		<action name="PatientFormActionAdvancedSearchPaymentTab" class="vaannila.action.PatientFormActionAdvancedSearchPaymentTab">
+
+		<action name="PatientFormActionAdvancedSearchPaymentTab"
+			class="vaannila.action.PatientFormActionAdvancedSearchPaymentTab">
 			<result name="patient_form_advanced_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-		
-		<action name="PatientFormActionAdvancedSearchAdditionalTab" class="vaannila.action.PatientFormActionAdvancedSearchAdditionalTab">
+
+		<action name="PatientFormActionAdvancedSearchAdditionalTab"
+			class="vaannila.action.PatientFormActionAdvancedSearchAdditionalTab">
 			<result name="patient_form_advanced_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
@@ -133,6 +142,19 @@
 
 		<action name="PatientFormActionSearchHyperlink" class="vaannila.action.PatientFormActionSearchHyperlink">
 			<result name="patient_form_search_hyperlink" type="dispatcher">/WEB-INF/views/patient_personal.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		<action name="EmployeeFormActionSearchHyperlink"
+			class="vaannila.action.EmployeeFormActionSearchHyperlink">
+			<result name="employee_form_search_hyperlink" type="dispatcher">/WEB-INF/views/login_success_hr.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		<action name="EmployeeFormAction" class="vaannila.action.EmployeeFormAction">
+			<result name="employee_form_success" type="dispatcher">/WEB-INF/views/login_success_hr.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>

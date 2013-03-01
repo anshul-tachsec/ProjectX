@@ -10,12 +10,12 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import vaannila.getset.PatientFormSearch;
+import vaannila.getset.EmployeeFormSearch;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 
-public class PatientFormActionSimpleSearch extends ActionSupport implements SessionAware{
+public class EmployeeFormActionSimpleSearch extends ActionSupport implements SessionAware{
 
 	@SuppressWarnings("rawtypes")
 	Map m;  
@@ -27,8 +27,8 @@ public class PatientFormActionSimpleSearch extends ActionSupport implements Sess
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	ArrayList<PatientFormSearch> al=new ArrayList();
-	public PatientFormSearch patientFormSearch;
+	ArrayList<EmployeeFormSearch> al=new ArrayList();
+	public EmployeeFormSearch employeeFormSearch;
 
 	@SuppressWarnings("rawtypes")
 	public ArrayList getAl() {
@@ -65,51 +65,51 @@ public class PatientFormActionSimpleSearch extends ActionSupport implements Sess
 		} catch (Exception e) {
 			System.out.println("exception " + e);
 		}
-		System.out.println("lastname " +patientFormSearch.getLastName());
+		System.out.println("get username " +employeeFormSearch.getUsername());
 
 		try{
 			stmt = conn.createStatement();
 	
 
-			String check1="SELECT * FROM patient_form WHERE (patient_no = "+patientFormSearch.getPatientID()+"";
+			String check1="SELECT * FROM patient_form WHERE (username = "+employeeFormSearch.getUsername()+"";
 			String check2;
 			String check3;
 			String check4;
 			String check5;
 			String check6;
 					
-			if(patientFormSearch.getLastName().toCharArray().length!=0 ){
-				 check2=" or last_name = '"+patientFormSearch.getLastName()+"'";
-				 System.out.println("last"+patientFormSearch.getLastName());
+			if(employeeFormSearch.getLastName().toCharArray().length!=0 ){
+				 check2=" or last_name = '"+employeeFormSearch.getLastName()+"'";
+				 System.out.println("last"+employeeFormSearch.getLastName());
 			}
 			else{
 				check2="";
 			}
-			if(patientFormSearch.getFirstName().toCharArray().length!=0 ){
-				 check3=" or first_name = '"+patientFormSearch.getFirstName()+"'";
-				 System.out.println("first"+patientFormSearch.getFirstName());
+			if(employeeFormSearch.getFirstName().toCharArray().length!=0 ){
+				 check3=" or first_name = '"+employeeFormSearch.getFirstName()+"'";
+				 System.out.println("first"+employeeFormSearch.getFirstName());
 			}
 			else{
 				check3="";
 			}
 			
-			if(patientFormSearch.getPatientDOB()!=null ){
-				 check4=" or DOB = '"+patientFormSearch.getPatientDOB()+"'";
-				 System.out.println("dob"+patientFormSearch.getPatientDOB());
+			if(employeeFormSearch.getPrimaryRole()!=null ){
+				 check4=" or DOB = '"+employeeFormSearch.getPrimaryRole()+"'";
+				 System.out.println("dob"+employeeFormSearch.getPrimaryRole());
 			}
 			else{
 				 check4="";
 			}
-			if(patientFormSearch.getCellPhone().toCharArray().length!=0 ){
-				check5=" or cell_ph = '"+patientFormSearch.getCellPhone()+"'";
-				 System.out.println("cell"+patientFormSearch.getCellPhone());
+			if(employeeFormSearch.getCellPhone().toCharArray().length!=0 ){
+				check5=" or cell_ph = '"+employeeFormSearch.getCellPhone()+"'";
+				 System.out.println("cell"+employeeFormSearch.getCellPhone());
 			}
 			else{
 				check5="";
 			}
-			if(patientFormSearch.getPatientEmail()!=null ){
-				 check6=" or email = '"+patientFormSearch.getPatientEmail()+"'";
-				 System.out.println("email"+patientFormSearch.getPatientEmail());
+			if(employeeFormSearch.getEmail()!=null ){
+				 check6=" or email = '"+employeeFormSearch.getEmail()+"'";
+				 System.out.println("email"+employeeFormSearch.getEmail());
 			}
 			else{
 				 check6="";
@@ -125,14 +125,15 @@ public class PatientFormActionSimpleSearch extends ActionSupport implements Sess
 			if(rs!=null){
 				System.out.println("in set mode");
 				while(rs.next()){
-					patientFormSearch= new PatientFormSearch();
-					patientFormSearch.setPatientID(rs.getInt("patient_no"));
-					patientFormSearch.setLastName(rs.getString("last_name"));
-					patientFormSearch.setFirstName(rs.getString("first_name"));
-					patientFormSearch.setPatientDOB(rs.getString("DOB"));
-					patientFormSearch.setCellPhone(rs.getString("cell_ph"));
-					patientFormSearch.setPatientEmail(rs.getString("email"));
-					al.add(patientFormSearch);
+					employeeFormSearch= new EmployeeFormSearch();
+					employeeFormSearch.setUsername(rs.getString("username"));
+					employeeFormSearch.setLastName(rs.getString("last_name"));
+					employeeFormSearch.setFirstName(rs.getString("first_name"));
+					employeeFormSearch.setDOB(rs.getString("DOB"));
+					employeeFormSearch.setCellPhone(rs.getString("cell_ph"));
+					employeeFormSearch.setPrimaryRole(rs.getString("primary_privilege"));
+					employeeFormSearch.setEmail(rs.getString("email"));
+					al.add(employeeFormSearch);
 				}
 			}
 			System.out.println("in display --mode LOginDAO");
@@ -146,14 +147,14 @@ public class PatientFormActionSimpleSearch extends ActionSupport implements Sess
 			e.printStackTrace();
 		}
 
-		return "patient_form_simple_search";
+		return "employee_form_simple_search";
 	}
 
-	public PatientFormSearch getPatientFormSearch() {
-		return patientFormSearch;
+	public EmployeeFormSearch getEmployeeFormSearch() {
+		return employeeFormSearch;
 	}
 
-	public void setPatientFormSearch(PatientFormSearch patientFormSearch) {
-		this.patientFormSearch = patientFormSearch;
+	public void setEmployeeFormSearch(EmployeeFormSearch employeeFormSearch) {
+		this.employeeFormSearch = employeeFormSearch;
 	}
 }

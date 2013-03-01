@@ -28,7 +28,7 @@
 
 
 
-<title>Biller Home Page</title>
+<title>User Admin Page</title>
 
 <link href="css/smoothness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 <script src="js/jquery-1.9.0.js"></script>
@@ -39,8 +39,9 @@
 		$("#frontofficeMode").button();
 		$("#billerMode").button();
 		$("#PTMode").button();
-
+		$("#roleRadioButton").buttonset();
 		$("#logout").button();
+		$("#format").buttonset();
 		var tabs = $("#tabs, #subtabs").tabs();
 		tabs.find(".ui-tabs-nav").sortable({
 			axis : "x",
@@ -103,7 +104,6 @@ body {
 	<button id="frontofficeMode">Front-Office Mode</button>
 	<button id="billerMode">Biller Mode</button>
 	<button id="PTMode">PT Mode</button>
-
 	<button id="logout">LogOut</button>
 	<div id="tabs">
 		<ul>
@@ -118,170 +118,838 @@ body {
 		<!-- 		tab for pt schedule -->
 		<div id="createNewEmployee">
 			<div id="subtabs">
+				<ul>
+					<li><a href="#PT" class=""> Physical Therapist</a></li>
+					<li><a href="#Frontoffice">Front Office</a></li>
+					<li><a href="#Biller">Biller</a></li>
+					<li><a href="#Admin">Admin</a></li>
 
-				<s:form action="PatientFormActionDemographicsTab" method="post">
-					<!-- 				main table -->
-					<table cellspacing="0" cellpadding="5">
-						<tr>
-							<td width="50%">
-								<table width="100%" border="0" cellspacing="0" cellpadding="1">
-									<tr>
-										<td width="25%">Last Name</td>
-										<td><input type="text" name="patientFormBean.lastName"
-											tabindex="1" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">First Name</td>
-										<td><input type="text" name="patientFormBean.firstName"
-											tabindex="1" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Age</td>
-										<td><input type="text" name="patientFormBean.age"
-											tabindex="2" size="25"></td>
-									</tr>
-									<!-- 				radio -->
-									<tr>
-										<td width="25%">Gender</td>
-										<td><input type="text" name="patientFormBean.gender"
-											tabindex="2" size="25"></td>
-									</tr>
 
-									<tr>
-										<td width="25%">Marital Status</td>
-										<td><input type="text"
-											name="patientFormBean.maritalStatus" tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">D.O.B.</td>
-										<td><input type="text" name="patientFormBean.patientDOB"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Race</td>
-										<td><input type="text" name="patientFormBean.PatientRace"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Ethnicity</td>
-										<td><input type="text"
-											name="patientFormBean.patientEthinicity" tabindex="2"
-											size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Language</td>
-										<td><input type="text"
-											name="patientFormBean.patientLanguage" tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">SSN</td>
-										<td><input type="text" name="patientFormBean.patientSSN"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">PT Licence Number</td>
-										<td><input type="text" name="patientFormBean.PTLicenceNumber"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Picture</td>
-										<td><input type="text" name="patientFormBean.employeePicture"
-											tabindex="2" size="25"></td>
-									</tr>
-								</table>
-							<td width="50%">
-								<!-- Table on right side -->
-								<table width="100%" border="0" cellspacing="0" cellpadding="1"
-									align="right">
+				</ul>
+				<div id="PT">
 
-									<tr>
-										<td width="25%">Residential Street</td>
-										<td><input type="text"
-											name="patientFormBean.residentialStreet" tabindex="2"
-											size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Residential City</td>
-										<td><input type="text"
-											name="patientFormBean.residentialCity" tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Residential State</td>
-										<td><input type="text"
-											name="patientFormBean.residentialState" tabindex="2"
-											size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Residential Zipcode</td>
-										<td><input type="text"
-											name="patientFormBean.residentialZipcode" tabindex="2"
-											size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Mail Street</td>
-										<td><input type="text" name="patientFormBean.mailStreet"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Mail City</td>
-										<td><input type="text" name="patientFormBean.mailCity"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Mail State</td>
-										<td><input type="text" name="patientFormBean.mailState"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Mail Zipcode</td>
-										<td><input type="text" name="patientFormBean.mailZipcode"
-											tabindex="2" size="25"></td>
-									</tr>
+					<s:form action="EmployeeFormAction" method="post">
+						<!-- 				main table -->
+						<table cellspacing="0" cellpadding="5">
+							<tr>
+								<td width="50%">
 
-									<tr>
-										<td width="25%">Home Phone</td>
-										<td><input type="text" name="patientFormBean.homePhone"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Cell Phone</td>
-										<td><input type="text" name="patientFormBean.cellPhone"
-											tabindex="2" size="25"></td>
-									</tr>
-									<tr>
-										<td width="25%">Email</td>
-										<td><input type="text"
-											name="patientFormBean.patientEmail" tabindex="2" size="25"></td>
-									</tr>
-									<tr><td>Type of Employee</td></tr>
-									<tr>
-										<td width="45%"><input type="checkbox" id="check1" /> <label
-											for="check1" >Front-Office</label></td>
-									</tr>
-									<tr>
-										<td><input type="checkbox" id="check2" /> <label
-											for="check2">PT</label></td>
-									</tr>
-									<tr>
-										<td><input type="checkbox" id="check3" /> <label
-											for="check3">Biller</label></td>
-									</tr>
-									<tr>
-										<td><input type="checkbox" id="check3" /> <label
-											for="check3" size="45">Contractual PT</label></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr>
-							<s:submit value="Save" />
-						</tr>
+									<table width="100%" border="0" cellspacing="0" cellpadding="1">
 
-					</table>
-				</s:form>
+										<tr>
+											<td width="25%">Username</td>
+											<td><input type="text" name="employeeFormBean.username"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Password</td>
+											<td><input type="text" name="employeeFormBean.password"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Last Name</td>
+											<td><input type="text" name="employeeFormBean.lastName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">First Name</td>
+											<td><input type="text" name="employeeFormBean.firstName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Employee ID</td>
+											<td><input type="text"
+												name="employeeFormBean.employeeID" tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Age</td>
+											<td><input type="text" name="employeeFormBean.age"
+												tabindex="2" size="25"></td>
+										</tr>
+										<!-- 				radio -->
+										<tr>
+											<td width="25%">Gender</td>
+											<td><input type="text" name="employeeFormBean.gender"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Marital Status</td>
+											<td><input type="text"
+												name="employeeFormBean.maritalStatus" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">D.O.B.</td>
+											<td><input type="text" name="employeeFormBean.DOB"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Race</td>
+											<td><input type="text" name="employeeFormBean.race"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Ethnicity</td>
+											<td><input type="text" name="employeeFormBean.ethnicity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Language</td>
+											<td><input type="text" name="employeeFormBean.language"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Picture</td>
+											<td><input type="text" name="employeeFormBean.picture"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Home Phone</td>
+											<td><input type="text" name="employeeFormBean.homePhone"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Cell Phone</td>
+											<td width="100%"><input type="text"
+												name="employeeFormBean.cellPhone" tabindex="2" size="25"></td>
+										</tr>
+
+									</table>
+								<td width="50%">
+									<!-- Table on right side -->
+									<table width="100%" border="0" cellspacing="0" cellpadding="1"
+										align="right">
+										<tr>
+											<td width="25%">Email</td>
+											<td><input type="text" name="employeeFormBean.email"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Street</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialStreet" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential City</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialCity" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential State</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialState" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialZipcode" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Street</td>
+											<td><input type="text"
+												name="employeeFormBean.mailStreet" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail City</td>
+											<td><input type="text" name="employeeFormBean.mailCity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail State</td>
+											<td><input type="text" name="employeeFormBean.mailState"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.mailZipcode" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">SSN</td>
+											<td><input type="text" name="employeeFormBean.SSN"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">ID 1</td>
+											<td><input type="text" name="employeeFormBean.PTID1"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">ID 2</td>
+											<td><input type="text" name="employeeFormBean.PTID2"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">ID 3</td>
+											<td><input type="text" name="employeeFormBean.PTID3"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">ID 4</td>
+											<td><input type="text" name="employeeFormBean.PTID4"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="100%">ID 5</td>
+											<td><input type="text" name="employeeFormBean.PTID5"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td><input value="pt" style="display: none"
+												name="employeeFormBean.primaryRole"></input></td>
+										</tr>
+										<tr>
+											<td>Optional Privileges</td>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.hrPrivilege" label="Admin">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.biPrivilege"
+												label="Biller">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.foPrivilege"
+												label="Front- office">
+											</s:checkbox>
+										</tr>
+									</table>
+								</td>
+
+
+							</tr>
+							<tr>
+								<s:submit value="Save" />
+							</tr>
+						</table>
+					</s:form>
+				</div>
+				<div id="Frontoffice">
+					<s:form action="EmployeeFormAction" method="post">
+						<!-- 				main table -->
+						<table cellspacing="0" cellpadding="5">
+							<tr>
+								<td width="50%">
+
+									<table width="100%" border="0" cellspacing="0" cellpadding="1">
+
+										<tr>
+											<td width="100%">Username</td>
+											<td><input type="text" name="employeeFormBean.username"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Password</td>
+											<td><input type="text" name="employeeFormBean.password"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Last Name</td>
+											<td><input type="text" name="employeeFormBean.lastName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">First Name</td>
+											<td><input type="text" name="employeeFormBean.firstName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Employee ID</td>
+											<td><input type="text"
+												name="employeeFormBean.employeeID" tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Age</td>
+											<td><input type="text" name="employeeFormBean.age"
+												tabindex="2" size="25"></td>
+										</tr>
+										<!-- 				radio -->
+										<tr>
+											<td width="25%">Gender</td>
+											<td><input type="text" name="employeeFormBean.gender"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Marital Status</td>
+											<td><input type="text"
+												name="employeeFormBean.maritalStatus" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">D.O.B.</td>
+											<td><input type="text" name="employeeFormBean.DOB"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Race</td>
+											<td><input type="text" name="employeeFormBean.race"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Ethnicity</td>
+											<td><input type="text" name="employeeFormBean.ethnicity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Language</td>
+											<td><input type="text" name="employeeFormBean.language"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Picture</td>
+											<td><input type="text" name="employeeFormBean.picture"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Home Phone</td>
+											<td><input type="text" name="employeeFormBean.homePhone"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Cell Phone</td>
+											<td><input type="text" name="employeeFormBean.cellPhone"
+												tabindex="2" size="25"></td>
+										</tr>
+
+									</table>
+								<td width="50%">
+									<!-- Table on right side -->
+									<table width="100%" border="0" cellspacing="0" cellpadding="1"
+										align="right">
+										<tr>
+											<td width="25%">Email</td>
+											<td><input type="text" name="employeeFormBean.email"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Street</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialStreet" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential City</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialCity" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential State</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialState" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialZipcode" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Street</td>
+											<td><input type="text"
+												name="employeeFormBean.mailStreet" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail City</td>
+											<td><input type="text" name="employeeFormBean.mailCity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail State</td>
+											<td><input type="text" name="employeeFormBean.mailState"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.mailZipcode" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="100%">SSN</td>
+											<td><input type="text" name="employeeFormBean.SSN"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td><input value="fo" style="display: none"
+												name="employeeFormBean.primaryRole"></input></td>
+										</tr>
+										<tr>
+											<td>Optional Privileges</td>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.ptPrivilege" label="PT">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.biPrivilege"
+												label="Biller">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.hrPrivilege" label="Admin">
+											</s:checkbox>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<s:submit value="Save" />
+							</tr>
+						</table>
+					</s:form>
+				</div>
+				<div id="Biller">
+					<s:form action="EmployeeFormAction" method="post">
+						<!-- 				main table -->
+						<table cellspacing="0" cellpadding="5">
+							<tr>
+								<td width="50%">
+
+									<table width="100%" border="0" cellspacing="0" cellpadding="1">
+
+										<tr>
+											<td width="100%">Username</td>
+											<td><input type="text" name="employeeFormBean.username"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Password</td>
+											<td><input type="text" name="employeeFormBean.password"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Last Name</td>
+											<td><input type="text" name="employeeFormBean.lastName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">First Name</td>
+											<td><input type="text" name="employeeFormBean.firstName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Employee ID</td>
+											<td><input type="text"
+												name="employeeFormBean.employeeID" tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Age</td>
+											<td><input type="text" name="employeeFormBean.age"
+												tabindex="2" size="25"></td>
+										</tr>
+										<!-- 				radio -->
+										<tr>
+											<td width="25%">Gender</td>
+											<td><input type="text" name="employeeFormBean.gender"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Marital Status</td>
+											<td><input type="text"
+												name="employeeFormBean.maritalStatus" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">D.O.B.</td>
+											<td><input type="text" name="employeeFormBean.DOB"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Race</td>
+											<td><input type="text" name="employeeFormBean.race"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Ethnicity</td>
+											<td><input type="text" name="employeeFormBean.ethnicity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Language</td>
+											<td><input type="text" name="employeeFormBean.language"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Picture</td>
+											<td><input type="text" name="employeeFormBean.picture"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Home Phone</td>
+											<td><input type="text" name="employeeFormBean.homePhone"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Cell Phone</td>
+											<td><input type="text" name="employeeFormBean.cellPhone"
+												tabindex="2" size="25"></td>
+										</tr>
+
+									</table>
+								<td width="50%">
+									<!-- Table on right side -->
+									<table width="100%" border="0" cellspacing="0" cellpadding="1"
+										align="right">
+										<tr>
+											<td width="25%">Email</td>
+											<td><input type="text" name="employeeFormBean.email"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Street</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialStreet" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential City</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialCity" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential State</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialState" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialZipcode" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Street</td>
+											<td><input type="text"
+												name="employeeFormBean.mailStreet" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail City</td>
+											<td><input type="text" name="employeeFormBean.mailCity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail State</td>
+											<td><input type="text" name="employeeFormBean.mailState"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.mailZipcode" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="100%">SSN</td>
+											<td><input type="text" name="employeeFormBean.SSN"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td><input value="bi" style="display: none"
+												name="employeeFormBean.primaryRole"></input></td>
+										</tr>
+										<tr>
+											<td>Optional Privileges</td>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.ptPrivilege" label="PT">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.hrPrivilege" label="Admin">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.foPrivilege"
+												label="Front- office">
+											</s:checkbox>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<s:submit value="Save" />
+							</tr>
+						</table>
+					</s:form>
+				</div>
+				<div id="Admin">
+					<s:form action="EmployeeFormAction" method="post">
+						<!-- 				main table -->
+						<table cellspacing="0" cellpadding="5">
+							<tr>
+								<td width="50%">
+
+									<table width="100%" border="0" cellspacing="0" cellpadding="1">
+
+										<tr>
+											<td width="100%">Username</td>
+											<td><input type="text" name="employeeFormBean.username"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Password</td>
+											<td><input type="text" name="employeeFormBean.password"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Last Name</td>
+											<td><input type="text" name="employeeFormBean.lastName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">First Name</td>
+											<td><input type="text" name="employeeFormBean.firstName"
+												tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Employee ID</td>
+											<td><input type="text"
+												name="employeeFormBean.employeeID" tabindex="1" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Age</td>
+											<td><input type="text" name="employeeFormBean.age"
+												tabindex="2" size="25"></td>
+										</tr>
+										<!-- 				radio -->
+										<tr>
+											<td width="25%">Gender</td>
+											<td><input type="text" name="employeeFormBean.gender"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Marital Status</td>
+											<td><input type="text"
+												name="employeeFormBean.maritalStatus" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">D.O.B.</td>
+											<td><input type="text" name="employeeFormBean.DOB"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Race</td>
+											<td><input type="text" name="employeeFormBean.race"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Ethnicity</td>
+											<td><input type="text" name="employeeFormBean.ethnicity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Language</td>
+											<td><input type="text" name="employeeFormBean.language"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td width="25%">Picture
+											<td><input type="text"
+												name="em
+											ployeeFormBean.picture" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="100%">Home Phone</td>
+											<td><input type="text" name="employeeFormBean.homePhone"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Cell Phone</td>
+											<td><input type="text" name="employeeFormBean.cellPhone"
+												tabindex="2" size="25"></td>
+										</tr>
+
+									</table>
+								<td width="50%">
+									<!-- Table on right side -->
+									<table width="100%" border="0" cellspacing="0" cellpadding="1"
+										align="right">
+										<tr>
+											<td width="25%">Email</td>
+											<td><input type="text" name="employeeFormBean.email"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Street</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialStreet" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential City</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialCity" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential State</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialState" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Residential Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.residentialZipcode" tabindex="2"
+												size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Street</td>
+											<td><input type="text"
+												name="employeeFormBean.mailStreet" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="100%">Mail City</td>
+											<td><input type="text" name="employeeFormBean.mailCity"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail State</td>
+											<td><input type="text" name="employeeFormBean.mailState"
+												tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">Mail Zipcode</td>
+											<td><input type="text"
+												name="employeeFormBean.mailZipcode" tabindex="2" size="25"></td>
+										</tr>
+										<tr>
+											<td width="25%">SSN</td>
+											<td><input type="text" name="employeeFormBean.SSN"
+												tabindex="2" size="25"></td>
+										</tr>
+
+										<tr>
+											<td><input value="hr" style="display: none"
+												name="employeeFormBean.primaryRole"></input></td>
+										</tr>
+										<tr>
+											<td>Optional Privileges</td>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.ptPrivilege" label="PT">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.biPrivilege"
+												label="Biller">
+											</s:checkbox>
+										</tr>
+										<tr>
+											<s:checkbox name="employeeFormBean.foPrivilege"
+												label="Front- office">
+											</s:checkbox>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<s:submit value="Save" />
+							</tr>
+						</table>
+					</s:form>
+				</div>
+
+
 			</div>
+
 		</div>
-		<div id="revokeEmployeeAccess"></div>
+		<div id="revokeEmployeeAccess">
+			<s:form action="EmployeeFormActionSimpleSearch" method="post">
+				<!-- 				main table -->
+				<table cellspacing="0" cellpadding="5">
+					<tr>
+						<td width="50%">
+							<table width="100%" border="0" cellspacing="0" cellpadding="1">
+								<tr>
+									<td width="25%">Username</td>
+									<td><input type="text" name="employeeFormSearch.username"
+										tabindex="1" size="25"></td>
+								</tr>
+								<tr>
+									<td width="25%">Last Name</td>
+									<td><input type="text" name="employeeFormSearch.lastName"
+										tabindex="2" size="25"></td>
+								</tr>
+								<tr>
+									<td width="25%">First Name</td>
+									<td><input type="text" name="employeeFormSearch.firstName"
+										tabindex="2" size="25"></td>
+								</tr>
+
+
+							</table>
+						<td width="50%">
+							<!-- Table on right side -->
+							<table width="100%" border="0" cellspacing="0" cellpadding="1"
+								align="right">
+								<tr>
+									<td width="25%">Cell Phone</td>
+									<td><input type="text" name="employeeFormSearch.cellPhone"
+										tabindex="2" size="25"></td>
+								</tr>
+								<tr>
+									<td width="25%">Role</td>
+									<td><input type="text"
+										name="employeeFormSearch.primaryPrivilege" tabindex="2" size="25"></td>
+								</tr>
+								<tr>
+									<td width="25%">Email</td>
+									<td><input type="text" name="employeeFormSearch.email"
+										tabindex="2" size="25"></td>
+								</tr>
+
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<s:submit value="Search" />
+					</tr>
+				</table>
+			</s:form>
+
+			<table width="100%" border="0" cellspacing="0" cellpadding="1">
+
+				<tr>
+					<td width="20%"><b>Username</b></td>
+					<td width="20%"><b>Last Name</b></td>
+					<td width="20%"><b>First Name</b></td>
+					<td width="20%"><b>Cellphone</b></td>
+					<td width="20%"><b>Role</b></td>
+					<td width="20%"><b>Email</b></td>
+
+					<s:iterator value="al" status="alStatus">
+						<tr>
+							<td width="20%"><a
+								href="<s:url action="EmployeeFormActionSearchHyperlink">
+											<s:param name="employeeFormBean.username" value="%{username}" />
+										</s:url>">${username}</a></td>
+							<td width="20%"><s:property value="%{lastName}" /></td>
+							<td width="20%"><s:property value="%{firstName}" /></td>
+							<td width="20%"><s:property value="%{cellPhone}" /></td>
+							<td width="20%"><s:property value="%{primaryPrivilege}" /></td>
+							<td width="20%"><s:property value="%{email}" /></td>
+						</tr>
+					</s:iterator>
+			</table>
+		</div>
+
 		<div id="checkEmployeeAccount"></div>
 		<div id="faxIn"></div>
 		<div id="faxOut"></div>

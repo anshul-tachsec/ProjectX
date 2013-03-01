@@ -154,12 +154,12 @@ body {
 										</tr>
 										<tr>
 											<td width="25%">D.O.B</td>
-											<td><input type="text" name="patientDOB" tabindex="2"
+											<td><input type="text" name="patientFormSearch.patientDOB" tabindex="2"
 												size="25"></td>
 										</tr>
 										<tr>
 											<td width="25%">Email</td>
-											<td><input type="text" name="patientEmail" tabindex="2"
+											<td><input type="text" name="patientFormSearch.patientEmail" tabindex="2"
 												size="25"></td>
 										</tr>
 
