@@ -33,16 +33,17 @@
 <link href="css/smoothness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 <script src="js/jquery-1.9.0.js"></script>
 <script src="js/jquery-ui-1.10.0.custom.js"></script>
+<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 <script>
 	$(function() {
 
 		$("#frontofficeMode").button();
 		$("#billerMode").button();
 		$("#PTMode").button();
-		$("#roleRadioButton").buttonset();
+		$("#rolecheckboxButton").buttonset();
 		$("#logout").button();
 		$("#format").buttonset();
-		var tabs = $("#tabs, #subtabs").tabs();
+		var tabs = $("#tabs, #subtabs").tabs({cookie:{expires: 1}});
 		tabs.find(".ui-tabs-nav").sortable({
 			axis : "x",
 			stop : function() {
@@ -54,7 +55,7 @@
 <style>
 body {
 	font: 62.5% "Trebuchet MS", sans-serif;
-	margin: 50px;
+	/* margin: 50px; */
 }
 
 .demoHeaders {
@@ -109,8 +110,7 @@ body {
 		<ul>
 			<li><a href="#createNewEmployee"><span>Create New
 						Employee</span></a></li>
-			<li><a href="#revokeEmployeeAccess">Revoke Employee Access</a></li>
-			<li><a href="#checkEmployeeAccount">Check Employee Account</a></li>
+			<li><a href="#userManagement">User Management</a></li>
 			<li><a href="#faxIn">Fax-In</a></li>
 			<li><a href="#faxOut">Fax-Out</a></li>
 
@@ -166,7 +166,7 @@ body {
 											<td><input type="text" name="employeeFormBean.age"
 												tabindex="2" size="25"></td>
 										</tr>
-										<!-- 				radio -->
+										<!-- 				checkbox -->
 										<tr>
 											<td width="25%">Gender</td>
 											<td><input type="text" name="employeeFormBean.gender"
@@ -370,7 +370,7 @@ body {
 											<td><input type="text" name="employeeFormBean.age"
 												tabindex="2" size="25"></td>
 										</tr>
-										<!-- 				radio -->
+										<!-- 				checkbox -->
 										<tr>
 											<td width="25%">Gender</td>
 											<td><input type="text" name="employeeFormBean.gender"
@@ -547,7 +547,7 @@ body {
 											<td><input type="text" name="employeeFormBean.age"
 												tabindex="2" size="25"></td>
 										</tr>
-										<!-- 				radio -->
+										<!-- 				checkbox -->
 										<tr>
 											<td width="25%">Gender</td>
 											<td><input type="text" name="employeeFormBean.gender"
@@ -724,7 +724,7 @@ body {
 											<td><input type="text" name="employeeFormBean.age"
 												tabindex="2" size="25"></td>
 										</tr>
-										<!-- 				radio -->
+										<!-- 				checkbox -->
 										<tr>
 											<td width="25%">Gender</td>
 											<td><input type="text" name="employeeFormBean.gender"
@@ -870,12 +870,12 @@ body {
 			</div>
 
 		</div>
-		<div id="revokeEmployeeAccess">
-			<s:form action="EmployeeFormActionSimpleSearch" method="post">
+		<div id="userManagement">
+			<s:form action="EmployeeFormActionSimpleSearchRevoke" method="post">
 				<!-- 				main table -->
 				<table cellspacing="0" cellpadding="5">
 					<tr>
-						<td width="50%">
+						<td width="33%">
 							<table width="100%" border="0" cellspacing="0" cellpadding="1">
 								<tr>
 									<td width="25%">Username</td>
@@ -895,10 +895,15 @@ body {
 
 
 							</table>
-						<td width="50%">
+						<td width="33%">
 							<!-- Table on right side -->
 							<table width="100%" border="0" cellspacing="0" cellpadding="1"
-								align="right">
+								align="center">
+								<tr>
+									<td width="25%">Employee ID</td>
+									<td><input type="text"
+										name="employeeFormSearch.employeeID" tabindex="1" size="25"></td>
+								</tr>
 								<tr>
 									<td width="25%">Cell Phone</td>
 									<td><input type="text" name="employeeFormSearch.cellPhone"
@@ -907,14 +912,27 @@ body {
 								<tr>
 									<td width="25%">Role</td>
 									<td><input type="text"
-										name="employeeFormSearch.primaryPrivilege" tabindex="2" size="25"></td>
-								</tr>
-								<tr>
-									<td width="25%">Email</td>
-									<td><input type="text" name="employeeFormSearch.email"
-										tabindex="2" size="25"></td>
+										name="employeeFormSearch.primaryPrivilege" tabindex="2"
+										size="25"></td>
 								</tr>
 
+
+							</table>
+						<td width="33%">
+							<!-- Table on right side -->
+							<table width="100%" border="0" cellspacing="0" cellpadding="1"
+								align="right">
+								<tr>
+								<tr>
+									<s:checkbox name="employeeFormSearch.active"
+										label="Active Employees" value="true">
+									</s:checkbox>
+								</tr>
+								<tr>
+									<s:checkbox name="employeeFormSearch.blocked"
+										label="Blocked Employees" value="true">
+									</s:checkbox>
+								</tr>
 							</table>
 						</td>
 					</tr>
@@ -928,29 +946,40 @@ body {
 
 				<tr>
 					<td width="20%"><b>Username</b></td>
+					<td width="20%"><b>Employee ID</b></td>
 					<td width="20%"><b>Last Name</b></td>
 					<td width="20%"><b>First Name</b></td>
-					<td width="20%"><b>Cellphone</b></td>
 					<td width="20%"><b>Role</b></td>
-					<td width="20%"><b>Email</b></td>
+					<td width="20%"><b>A/C Status</b></td>
+
 
 					<s:iterator value="al" status="alStatus">
 						<tr>
 							<td width="20%"><a
-								href="<s:url action="EmployeeFormActionSearchHyperlink">
-											<s:param name="employeeFormBean.username" value="%{username}" />
-										</s:url>">${username}</a></td>
+								href="
+							<s:url action="EmployeeFormActionSearchHyperlinkCheck">
+								<s:param name="employeeFormBean.username" value="%{username}" />
+							</s:url>">${username}</a></td>
+							<td width="20%"><s:property value="%{employeeID}" /></td>
 							<td width="20%"><s:property value="%{lastName}" /></td>
 							<td width="20%"><s:property value="%{firstName}" /></td>
 							<td width="20%"><s:property value="%{cellPhone}" /></td>
 							<td width="20%"><s:property value="%{primaryPrivilege}" /></td>
-							<td width="20%"><s:property value="%{email}" /></td>
+							<td width="20%"><a
+								href="<s:url action="EmployeeFormActionSearchHyperlinkRevoke">
+											<s:param name="employeeFormSearch.active" value="%{active}" />
+											<s:param name="employeeFormSearch.username" value="%{username}" />
+											<s:param name="employeeFormSearch.employeeID" value="%{employeeID}" />
+											<s:param name="employeeFormSearch.lastName" value="%{lastName}" />
+											<s:param name="employeeFormSearch.firstName" value="%{firstName}" />
+											<s:param name="employeeFormSearch.cellPhone" value="%{cellPhone}" />
+											<s:param name="employeeFormSearch.primaryPrivilege" value="%{primaryPrivilege}" />
+										</s:url>">${active}</a></td>
+
 						</tr>
 					</s:iterator>
 			</table>
 		</div>
-
-		<div id="checkEmployeeAccount"></div>
 		<div id="faxIn"></div>
 		<div id="faxOut"></div>
 	</div>

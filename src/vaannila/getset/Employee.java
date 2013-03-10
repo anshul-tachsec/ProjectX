@@ -36,12 +36,40 @@ public class Employee {
 	private String PTID3;
 	private String PTID4;
 	private String PTID5;
-	private String employeeID;
+	private int employeeID;
 	private boolean hrPrivilege;
 	private boolean biPrivilege;
 	private boolean ptPrivilege;
 	private boolean foPrivilege;
+	private boolean active;
+	private boolean blocked;
+
+
 	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	public int getEmployeeID() {
+		return employeeID;
+	}
+
+	public void setEmployeeID(int employeeID) {
+		this.employeeID = employeeID;
+	}
+
 	
 	public boolean isHrPrivilege() {
 		return hrPrivilege;
@@ -75,13 +103,7 @@ public class Employee {
 		this.foPrivilege = foPrivilege;
 	}
 
-	public String getEmployeeID() {
-		return employeeID;
-	}
-
-	public void setEmployeeID(String employeeID) {
-		this.employeeID = employeeID;
-	}
+	
 
 	public String getPrimaryRole() {
 		return primaryRole;

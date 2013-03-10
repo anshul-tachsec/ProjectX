@@ -15,7 +15,7 @@ import vaannila.getset.EmployeeFormSearch;
 import com.opensymphony.xwork2.ActionSupport;
 
 
-public class EmployeeFormActionSimpleSearch extends ActionSupport implements SessionAware{
+public class EmployeeFormActionSimpleSearchRevoke extends ActionSupport implements SessionAware{
 
 	@SuppressWarnings("rawtypes")
 	Map m;  
@@ -69,74 +69,87 @@ public class EmployeeFormActionSimpleSearch extends ActionSupport implements Ses
 
 		try{
 			stmt = conn.createStatement();
-	
+			System.out.println("Active "+employeeFormSearch.isActive());
+			System.out.println("Blocked "+employeeFormSearch.isBlocked());
 
-			String check1="SELECT * FROM patient_form WHERE (username = "+employeeFormSearch.getUsername()+"";
+			String check1="SELECT * FROM employee INNER JOIN users ON employee.username= users.username WHERE ((employee.username = '"+employeeFormSearch.getUsername()+"'";
 			String check2;
 			String check3;
 			String check4;
 			String check5;
 			String check6;
-					
+
 			if(employeeFormSearch.getLastName().toCharArray().length!=0 ){
-				 check2=" or last_name = '"+employeeFormSearch.getLastName()+"'";
-				 System.out.println("last"+employeeFormSearch.getLastName());
+				check2=" or last_name = '"+employeeFormSearch.getLastName()+"'";
+				System.out.println("last"+employeeFormSearch.getLastName());
 			}
 			else{
 				check2="";
 			}
 			if(employeeFormSearch.getFirstName().toCharArray().length!=0 ){
-				 check3=" or first_name = '"+employeeFormSearch.getFirstName()+"'";
-				 System.out.println("first"+employeeFormSearch.getFirstName());
+				check3=" or first_name = '"+employeeFormSearch.getFirstName()+"'";
+				System.out.println("first"+employeeFormSearch.getFirstName());
 			}
 			else{
 				check3="";
 			}
-			
+
 			if(employeeFormSearch.getPrimaryRole()!=null ){
-				 check4=" or DOB = '"+employeeFormSearch.getPrimaryRole()+"'";
-				 System.out.println("dob"+employeeFormSearch.getPrimaryRole());
+				check4=" or primary_role = '"+employeeFormSearch.getPrimaryRole()+"'";
+				System.out.println("dob"+employeeFormSearch.getPrimaryRole());
 			}
 			else{
-				 check4="";
+				check4="";
 			}
 			if(employeeFormSearch.getCellPhone().toCharArray().length!=0 ){
 				check5=" or cell_ph = '"+employeeFormSearch.getCellPhone()+"'";
-				 System.out.println("cell"+employeeFormSearch.getCellPhone());
+				System.out.println("cell"+employeeFormSearch.getCellPhone());
 			}
 			else{
 				check5="";
 			}
-			if(employeeFormSearch.getEmail()!=null ){
-				 check6=" or email = '"+employeeFormSearch.getEmail()+"'";
-				 System.out.println("email"+employeeFormSearch.getEmail());
+			if(employeeFormSearch.getEmployeeID()!=0){
+				check6=" or employee_id = '"+employeeFormSearch.getEmployeeID()+"'";
+				System.out.println("employee ID"+employeeFormSearch.getEmployeeID());
 			}
 			else{
-				 check6="";
+				check6="";
 			}
-			String check7=")";
+
+			String check7="";
+			if(employeeFormSearch.isActive()&&employeeFormSearch.isBlocked()){
+				check7="))";
+
+			}
+			else if(employeeFormSearch.isActive()){
+				check7=") and (users.active='true'))";
+			}
+			else if(employeeFormSearch.isBlocked()){
+				check7=") and (users.active='false'))";
+
+			}
 			String check = ""+check1+check2+check3+check4+check5+check6+check7+"";
-		
-			
+
+
 
 			System.out.println(check);
 			stmt.execute(check);
 			rs = stmt.getResultSet();
 			if(rs!=null){
-				System.out.println("in set mode");
+				System.out.println("in employee Search mode");
 				while(rs.next()){
 					employeeFormSearch= new EmployeeFormSearch();
 					employeeFormSearch.setUsername(rs.getString("username"));
 					employeeFormSearch.setLastName(rs.getString("last_name"));
 					employeeFormSearch.setFirstName(rs.getString("first_name"));
-					employeeFormSearch.setDOB(rs.getString("DOB"));
 					employeeFormSearch.setCellPhone(rs.getString("cell_ph"));
-					employeeFormSearch.setPrimaryRole(rs.getString("primary_privilege"));
+					employeeFormSearch.setPrimaryRole(rs.getString("primary_role"));
 					employeeFormSearch.setEmail(rs.getString("email"));
+					employeeFormSearch.setActive(rs.getBoolean("users.active"));
 					al.add(employeeFormSearch);
 				}
 			}
-			System.out.println("in display --mode LOginDAO");
+			System.out.println("in display --mode");
 			ListIterator itr=al.listIterator();
 			while(itr.hasNext())
 			{

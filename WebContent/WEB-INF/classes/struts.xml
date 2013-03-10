@@ -102,6 +102,14 @@
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
+		
+		<action name="EmployeeFormActionUpdate"
+			class="vaannila.action.EmployeeFormActionUpdate">
+			<result name="employee_form_success" type="dispatcher">/WEB-INF/views/check_employee.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
 
 		<action name="PatientFormActionSimpleSearch" class="vaannila.action.PatientFormActionSimpleSearch">
 			<result name="patient_form_simple_search" type="dispatcher">/WEB-INF/views/login_success_fo.jsp
@@ -110,7 +118,15 @@
 			</result>
 		</action>
 
-		<action name="EmployeeFormActionSimpleSearch" class="vaannila.action.EmployeeFormActionSimpleSearch">
+		<action name="EmployeeFormActionSimpleSearchRevoke" class="vaannila.action.EmployeeFormActionSimpleSearchRevoke">
+			<result name="employee_form_simple_search" type="dispatcher">/WEB-INF/views/login_success_hr.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		
+		
+		<action name="EmployeeFormActionSimpleSearchCheck" class="vaannila.action.EmployeeFormActionSimpleSearchCheck">
 			<result name="employee_form_simple_search" type="dispatcher">/WEB-INF/views/login_success_hr.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
@@ -146,9 +162,17 @@
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>
 		</action>
-		<action name="EmployeeFormActionSearchHyperlink"
-			class="vaannila.action.EmployeeFormActionSearchHyperlink">
+		<action name="EmployeeFormActionSearchHyperlinkRevoke"
+			class="vaannila.action.EmployeeFormActionSearchHyperlinkRevoke">
 			<result name="employee_form_search_hyperlink" type="dispatcher">/WEB-INF/views/login_success_hr.jsp
+			</result>
+			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
+			</result>
+		</action>
+		
+		<action name="EmployeeFormActionSearchHyperlinkCheck"
+			class="vaannila.action.EmployeeFormActionSearchHyperlinkCheck">
+			<result name="employee_form_search_hyperlink" type="dispatcher">/WEB-INF/views/check_employee.jsp
 			</result>
 			<result name="master_error" type="dispatcher">/WEB-INF/views/master_error.jsp
 			</result>

@@ -9,7 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import vaannila.DAO.LoginDAO;
 import vaannila.getset.Employee;
-public class EmployeeFormActionSearchHyperlink extends ActionSupport implements SessionAware{ 
+public class EmployeeFormActionUpdate extends ActionSupport implements SessionAware{ 
 
 	@SuppressWarnings("rawtypes")
 	Map m;  
@@ -20,23 +20,26 @@ public class EmployeeFormActionSearchHyperlink extends ActionSupport implements 
 	}
 	private static final long serialVersionUID = 1L;
 	public Employee employeeFormBean;
-	
-	public EmployeeFormActionSearchHyperlink(){
-		this.employeeFormBean=new Employee();
-	}
-		public Employee getEmployeeFormBean() {
+	public Employee getEmployeeBean(){
 		return employeeFormBean;
 	}
-	public void setEmployeeFormBean(Employee employeeFormBean) {
+	public EmployeeFormActionUpdate(){
+		this.employeeFormBean=new Employee();
+	}
+	public void setEmployeeBean(Employee employeeFormBean) {
+
 		this.employeeFormBean = employeeFormBean;
 	}
-		public String execute() throws Exception{
-		System.out.println("In SearchHyperlink Redirect of HR");
+	public String execute() throws Exception{
+		System.out.println("In EmployeeActionUpdate");
 
 		System.out.println("username via session"+m.get("username"));	
 		System.out.println("domain via session"+m.get("domain"));
-		System.out.println("Search patientID"+employeeFormBean.getUsername());
+		System.out.println("before patiententry update Additional Tab");
+		LoginDAO.updateEmployee(employeeFormBean , m );
+		System.out.println("before patient retrieval Additional tab ");
+
 		LoginDAO.retrieveEmployeeForm(employeeFormBean, m);
-		return "employee_form_search_hyperlink";
+		return "employee_form_success";
 	}
 }

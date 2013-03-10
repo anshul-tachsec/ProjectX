@@ -25,20 +25,23 @@
 <%-- 		<td>${i.cellPhone}</td> --%>
 <!-- 	</tr> -->
 <%-- </s:iterator> --%>
-
-
-
 <title>Front Office Home Page</title>
 
 <link href="css/smoothness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 <script src="js/jquery-1.9.0.js"></script>
 <script src="js/jquery-ui-1.10.0.custom.js"></script>
+<link rel='stylesheet' type='text/css' href='fc/fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='fc/fullcalendar.print.css' media='print' />
+<script type='text/javascript' src='fc/fullcalendar.min.js'></script>
 <script>
-	$(function() {
-
+	$(document).ready(function() {
 		$("#billerMode").button();
 		$("#logout").button();
-		var tabs = $("#tabs, #subtabs").tabs();
+		var tabs = $("#tabs, #subtabs").tabs({
+			show : function(event, ui) {
+				$("#calendar").fullCalendar('render');
+			}
+		});
 		tabs.find(".ui-tabs-nav").sortable({
 			axis : "x",
 			stop : function() {
@@ -50,7 +53,8 @@
 <style>
 body {
 	font: 62.5% "Trebuchet MS", sans-serif;
-	margin: 50px;
+	/* 	/* margin: 50px; */
+	*/
 }
 
 .demoHeaders {
@@ -110,12 +114,14 @@ body {
 
 		</ul>
 		<!-- 		tab for pt schedule -->
-		<div id="ptSchedule"></div>
+		<div id="ptSchedule">
+			<div id="calendar">PT SChedule should appear here :(</div>
+		</div>
 		<!-- tab for open record -->
 		<div id="openRecord">
 			<div id="subtabs">
 				<ul>
-					<li><a href="#simpleSearch" class=""> Simple Search</a></li>
+					<li><a href="#simpleSearch" class="">Simple Search</a></li>
 					<li><a href="#advancedSearch">Advanced Search</a></li>
 				</ul>
 				<div id="simpleSearch">
@@ -127,8 +133,8 @@ body {
 									<table width="100%" border="0" cellspacing="0" cellpadding="1">
 										<tr>
 											<td width="25%">Patient ID</td>
-											<td><input type="text" name="patientFormSearch.patientID"
-												tabindex="1" size="25"></td>
+											<td><input type="text"
+												name="patientFormSearch.patientID" tabindex="1" size="25"></td>
 										</tr>
 										<tr>
 											<td width="25%">Last Name</td>
@@ -154,13 +160,13 @@ body {
 										</tr>
 										<tr>
 											<td width="25%">D.O.B</td>
-											<td><input type="text" name="patientFormSearch.patientDOB" tabindex="2"
-												size="25"></td>
+											<td><input type="text"
+												name="patientFormSearch.patientDOB" tabindex="2" size="25"></td>
 										</tr>
 										<tr>
 											<td width="25%">Email</td>
-											<td><input type="text" name="patientFormSearch.patientEmail" tabindex="2"
-												size="25"></td>
+											<td><input type="text"
+												name="patientFormSearch.patientEmail" tabindex="2" size="25"></td>
 										</tr>
 
 									</table>
@@ -206,7 +212,8 @@ body {
 							<li><a href="#additionalInfo">Additional Information</a></li>
 						</ul>
 						<div id="demographics">
-							<s:form action="PatientFormActionAdvancedSearchDemographicsTab" method="post">
+							<s:form action="PatientFormActionAdvancedSearchDemographicsTab"
+								method="post">
 								<!-- 				main table -->
 								<table cellspacing="0" cellpadding="5">
 									<tr>
@@ -215,8 +222,8 @@ body {
 												cellpadding="1">
 												<tr>
 													<td width="25%">Last Name</td>
-													<td><input type="text" name="patientFormSearch.lastName"
-														tabindex="2" size="25"></td>
+													<td><input type="text"
+														name="patientFormSearch.lastName" tabindex="2" size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">First Name</td>
@@ -272,7 +279,8 @@ body {
 												<tr>
 													<td width="25%">Race</td>
 													<td><input type="text"
-														name="patientFormSearch.PatientRace" tabindex="2" size="25"></td>
+														name="patientFormSearch.PatientRace" tabindex="2"
+														size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Ethnicity</td>
@@ -339,8 +347,8 @@ body {
 												</tr>
 												<tr>
 													<td width="25%">Mail City</td>
-													<td><input type="text" name="patientFormSearch.mailCity"
-														tabindex="2" size="25"></td>
+													<td><input type="text"
+														name="patientFormSearch.mailCity" tabindex="2" size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Mail State</td>
@@ -350,7 +358,8 @@ body {
 												<tr>
 													<td width="25%">Mail Zipcode</td>
 													<td><input type="text"
-														name="patientFormSearch.mailZipcode" tabindex="2" size="25"></td>
+														name="patientFormSearch.mailZipcode" tabindex="2"
+														size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Last Visit Date</td>
@@ -377,7 +386,8 @@ body {
 												<tr>
 													<td width="25%">Email</td>
 													<td><input type="text"
-														name="patientFormSearch.patientEmail" tabindex="2" size="25"></td>
+														name="patientFormSearch.patientEmail" tabindex="2"
+														size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Reminder Method</td>
@@ -403,7 +413,8 @@ body {
 						</div>
 
 						<div id="paymentInfo">
-							<s:form action="PatientFormActionAdvancedSearchPaymentTab" method="post">
+							<s:form action="PatientFormActionAdvancedSearchPaymentTab"
+								method="post">
 								<!-- 				main table -->
 								<table cellspacing="0" cellpadding="5">
 									<tr>
@@ -429,7 +440,8 @@ body {
 												<tr>
 													<td width="25%">Consent Notes</td>
 													<td><input type="text"
-														name="patientFormSearch.consentNotes" tabindex="2" size="25"></td>
+														name="patientFormSearch.consentNotes" tabindex="2"
+														size="25"></td>
 												</tr>
 
 												<tr>
@@ -493,8 +505,8 @@ body {
 												<tr>
 													<td width="25%">Secondary Group ID No.</td>
 													<td><input type="text"
-														name="patientFormSearch.secondaryGroupIdNumber" tabindex="2"
-														size="25"></td>
+														name="patientFormSearch.secondaryGroupIdNumber"
+														tabindex="2" size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Secondary Policy Provider Name</td>
@@ -535,8 +547,8 @@ body {
 												<tr>
 													<td width="25%">Tertiary Group ID No.</td>
 													<td><input type="text"
-														name="patientFormSearch.tertiaryGroupIdNumber" tabindex="2"
-														size="25"></td>
+														name="patientFormSearch.tertiaryGroupIdNumber"
+														tabindex="2" size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Tertiary Policy Provider Name</td>
@@ -573,7 +585,8 @@ body {
 												<tr>
 													<td width="25%">Co-Pay</td>
 													<td><input type="text"
-														name="patientFormSearch.patientCoPay" tabindex="2" size="25"></td>
+														name="patientFormSearch.patientCoPay" tabindex="2"
+														size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Co-Insurance</td>
@@ -602,7 +615,8 @@ body {
 												<tr>
 													<td width="25%">Payment Notes</td>
 													<td><input type="text"
-														name="patientFormSearch.paymentNotes" tabindex="2" size="25"></td>
+														name="patientFormSearch.paymentNotes" tabindex="2"
+														size="25"></td>
 												</tr>
 											</table>
 										</td>
@@ -618,7 +632,8 @@ body {
 
 						<!-- 				Third tab in new record -->
 						<div id="additionalInfo">
-							<s:form action="PatientFormActionAdvancedSearchAdditionalTab" method="post">
+							<s:form action="PatientFormActionAdvancedSearchAdditionalTab"
+								method="post">
 								<!-- 				main table -->
 								<table cellspacing="0" cellpadding="5">
 									<tr>
@@ -649,17 +664,19 @@ body {
 												<tr>
 													<td width="25%">Facility Name</td>
 													<td><input type="text"
-														name="patientFormSearch.facilityName" tabindex="2" size="25"></td>
+														name="patientFormSearch.facilityName" tabindex="2"
+														size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Email Consent</td>
 													<td><input type="text"
-														name="patientFormSearch.emailConsent" tabindex="2" size="25"></td>
+														name="patientFormSearch.emailConsent" tabindex="2"
+														size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Body Part</td>
-													<td><input type="text" name="patientFormSearch.bodyPart"
-														tabindex="2" size="25"></td>
+													<td><input type="text"
+														name="patientFormSearch.bodyPart" tabindex="2" size="25"></td>
 												</tr>
 												<tr>
 													<td width="25%">Additional Notes</td>

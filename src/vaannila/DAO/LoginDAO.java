@@ -17,6 +17,7 @@ import java.util.Map;
 import com.mysql.jdbc.ResultSetImpl;
 
 import vaannila.getset.Employee;
+import vaannila.getset.EmployeeFormSearch;
 import vaannila.getset.Login;
 import vaannila.getset.PatientForm;
 
@@ -47,7 +48,7 @@ public class LoginDAO {
 			} catch (Exception e) {
 				System.out.println("exception " + e);
 			}
-			String sql = "select u.primary_privilege, u.name from users u where u.username = ? and u.password=? and u.active=1";
+			String sql = "select u.primary_privilege, u.name from users u where u.username = ? and u.password=? and u.active='true'";
 			PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
 			ps.setString(1,username);
 			ps.setString(2,password);
@@ -1006,7 +1007,7 @@ public class LoginDAO {
 					+ employeeFormBean.getFirstName()+" "+employeeFormBean.getLastName()
 					+ "','"
 					+ employeeFormBean.getPrimaryRole()
-					+ "','1')";
+					+ "','true')";
 			PreparedStatement ps1 = (PreparedStatement) conn.prepareStatement(sql1);
 			System.out.println(sql1);
 			ps1.executeUpdate();	
@@ -1122,21 +1123,19 @@ public class LoginDAO {
 					+ employeeFormBean.getFirstName()+" "+employeeFormBean.getLastName()
 					+ "','"
 					+ employeeFormBean.getPrimaryRole()
-					+ "','1')";
+					+ "','true')";
 			PreparedStatement ps1 = (PreparedStatement) conn.prepareStatement(sql1);
 			System.out.println(sql1);
 			ps1.executeUpdate();	
 
 
-			String sql = "INSERT INTO employee(username,password,last_name,first_name,employee_id,age," +
+			String sql = "INSERT INTO employee(username,last_name,first_name,employee_id,age," +
 					"gender,marital_status,DOB,race,ethnicity,language,picture,home_ph,cell_ph,email," +
 					"res_street,res_city,res_state,res_zipcode,mail_street,mail_city," +
 					"mail_state,mail_zipcode,SSN,PTID1,PTID2,PTID3,PTID4,PTID5," +
 					"primary_role,pt_privilege,fo_privilege,bi_privilege,hr_privilege" +
 					")   VALUES('"
 					+ employeeFormBean.getUsername()
-					+ "','"
-					+ employeeFormBean.getPassword()
 					+ "','"
 					+ employeeFormBean.getLastName()
 					+ "','"
@@ -1218,8 +1217,240 @@ public class LoginDAO {
 
 	@SuppressWarnings("rawtypes")
 	public static void retrieveEmployeeForm(Employee employeeFormBean, Map m) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("In retrieve Employee");
+
+		try{
+
+			Statement stmt = null;
+			ResultSet rs = null;
+			Connection conn = null;
+			String url = "jdbc:mysql://127.0.0.1:3306/";
+			String driver = "com.mysql.jdbc.Driver";
+			String userName = "root";
+			String pass = "tachsec";
+			System.out.println("Domain Name DAO: "+m.get("domain"));
+			System.out.println();
+			/*domain contains name of database.	
+			 * 
+			 */
+			try {
+				System.out.println("test "+employeeFormBean.getUsername());
+				Class.forName(driver).newInstance();
+				conn = (Connection) DriverManager.getConnection(url + m.get("domain"), userName, pass);
+				System.out.println("after connection");
+			} catch (Exception e) {
+				System.out.println("exception " + e);
+			}
+
+			stmt = conn.createStatement();
+			String check = "SELECT * FROM employee WHERE username="+employeeFormBean.getUsername();					
+			stmt.execute(check);
+			rs = stmt.getResultSet();
+			rs.next();
+
+			employeeFormBean.setLastName(rs.getString("last_name"));
+
+			employeeFormBean.setFirstName(rs.getString("first_name"));
+
+			employeeFormBean.setEmployeeID(rs.getInt("employee_id"));
+
+			employeeFormBean.setAge(rs.getString("age"));
+
+			employeeFormBean.setGender(rs.getString("gender"));
+
+			employeeFormBean.setMaritalStatus(rs.getString("marital_status"));
+
+			employeeFormBean.setDOB(rs.getString("DOB"));
+
+			employeeFormBean.setRace(rs.getString("race"));
+
+			employeeFormBean.setEthnicity(rs.getString("ethnicity"));
+
+			employeeFormBean.setLanguage(rs.getString("language"));
+
+			employeeFormBean.setPicture(rs.getString("picture"));
+
+			employeeFormBean.setHomePhone(rs.getString("home_ph"));
+
+			employeeFormBean.setCellPhone(rs.getString("cell_ph"));
+
+			employeeFormBean.setEmail(rs.getString("email"));
+
+			employeeFormBean.setResidentialStreet(rs.getString("res_street"));
+
+			employeeFormBean.setResidentialCity(rs.getString("res_city"));
+
+			employeeFormBean.setResidentialState(rs.getString("res_state"));
+
+			employeeFormBean.setResidentialZipcode(rs.getString("res_zipcode"));
+
+			employeeFormBean.setMailStreet(rs.getString("mail_street"));
+
+			employeeFormBean.setMailCity(rs.getString("mail_city"));
+
+			employeeFormBean.setMailState(rs.getString("mail_state"));
+
+			employeeFormBean.setMailZipcode(rs.getString("mail_zipcode"));
+
+			employeeFormBean.setSSN(rs.getString("SSN"));
+
+			employeeFormBean.setPTID1(rs.getString("PTID1"));
+
+			employeeFormBean.setPTID2(rs.getString("PTID2"));
+
+			employeeFormBean.setPTID3(rs.getString("PTID3"));
+
+			employeeFormBean.setPTID4(rs.getString("PTID4"));
+
+			employeeFormBean.setPTID5(rs.getString("PTID5"));
+
+			employeeFormBean.setPrimaryRole(rs.getString("primary_role"));
+
+/*			if(rs.getString("fo_privilege").equals("true")){
+				employeeFormBean.setFoPrivilege(true);
+			}
+			else{
+				employeeFormBean.setFoPrivilege(false);
+
+			}
+			if(rs.getString("hr_privilege").equals("true")){
+				employeeFormBean.setHrPrivilege(true);
+			}
+			else{
+				employeeFormBean.setHrPrivilege(false);
+
+			}
+
+			if(rs.getString("pt_privilege").equals("true")){
+				employeeFormBean.setPtPrivilege(true);
+			}
+			else{
+				employeeFormBean.setPtPrivilege(false);
+
+			}			
+			if(rs.getString("bi_privilege").equals("true")){
+				employeeFormBean.setBiPrivilege(true);
+			}
+			else{
+				employeeFormBean.setBiPrivilege(false);
+
+			}			
+*/
+			System.out.println("After retrieve over");
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}		
 	}
 
+
+
+	@SuppressWarnings({ })
+	public static void revokeAccess(EmployeeFormSearch 
+			employeeFormSearch, Map<?, ?> m) {
+		System.out.println("In retrieve Employee");
+
+		try{
+
+			Statement stmt = null;
+			Connection conn = null;
+			String url = "jdbc:mysql://127.0.0.1:3306/";
+			String driver = "com.mysql.jdbc.Driver";
+			String userName = "root";
+			String pass = "tachsec";
+			System.out.println("Domain Name DAO: "+m.get("domain"));
+			System.out.println();
+			/*domain contains name of database.	
+			 * 
+			 */
+			try {
+				System.out.println("test "+employeeFormSearch.getUsername());
+				Class.forName(driver).newInstance();
+				conn = (Connection) DriverManager.getConnection(url + m.get("domain"), userName, pass);
+				System.out.println("after connection");
+			} catch (Exception e) {
+				System.out.println("exception " + e);
+			}
+
+			stmt = conn.createStatement();
+			String check=""; 
+			if(employeeFormSearch.isActive()){
+				check = "Update users set active='false' where username='"+employeeFormSearch.getUsername()+"'";
+			}
+			else{
+				check = "Update users set active='true' where username='"+employeeFormSearch.getUsername()+"'";
+			}
+			stmt.execute(check);
+			stmt = conn.createStatement();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+
+
+	@SuppressWarnings("rawtypes")
+	public static void updateEmployee(Employee employeeFormBean, Map m) {
+		System.out.println("In update employee");
+
+		try{
+			Connection conn = null;
+			String url = "jdbc:mysql://127.0.0.1:3306/";
+			String driver = "com.mysql.jdbc.Driver";
+			String userName = "root";
+			String pass = "tachsec";
+			System.out.println("Domain Name DAO: "+m.get("domain"));
+			System.out.println();
+			/*domain contains name of database.	
+			 * 
+			 */
+			try {
+				System.out.println("test first name"+employeeFormBean.getFirstName());
+				Class.forName(driver).newInstance();
+				conn = (Connection) DriverManager.getConnection(url + m.get("domain"), userName, pass);
+				System.out.println("after connection");
+			} catch (Exception e) {
+				System.out.println("exception " + e);
+			}
+			String sql = "UPDATE employee set last_name='"+employeeFormBean.getLastName()+ "',"+
+					"first_name='"+employeeFormBean.getFirstName()+ "',"+
+					"employee_id="+employeeFormBean.getEmployeeID()+ ","+
+					"age='"+employeeFormBean.getAge()+ "',"+
+					"gender='"+employeeFormBean.getGender()+ "',"+
+					"marital_status='"+employeeFormBean.getMaritalStatus()+ "',"+
+					"DOB='"+employeeFormBean.getDOB()+ "',"+
+					"race='"+employeeFormBean.getRace()+ "',"+
+					"ethnicity='"+employeeFormBean.getEthnicity()+"',"+
+					"language='"+employeeFormBean.getLanguage()+ "',"+
+					"picture='"+employeeFormBean.getPicture()+ "',"+
+					"home_ph='"+employeeFormBean.getHomePhone()+ "',"+
+					"cell_ph='"+employeeFormBean.getCellPhone()+ "',"+
+					"email='"+employeeFormBean.getEmail()+ "',"+
+					"res_street='"+employeeFormBean.getResidentialStreet()+ "',"+
+					"res_city='"+employeeFormBean.getResidentialCity()+ "',"+
+					"res_state='"+employeeFormBean.getResidentialState()+ "',"+
+					"res_zipcode='"+employeeFormBean.getResidentialZipcode()+ "',"+
+					"mail_street='"+employeeFormBean.getMailStreet()+ "',"+
+					"mail_city='"+employeeFormBean.getMailCity()+ "',"+
+					"mail_state='"+employeeFormBean.getMailState()+ "',"+
+					"mail_zipcode='"+employeeFormBean.getMailZipcode()+ "',"+
+					"SSN='"+employeeFormBean.getSSN()+ "',"+
+					"PTID1='"+employeeFormBean.getPTID1()+ "',"+
+					"PTID2='"+employeeFormBean.getPTID2()+ "',"+
+					"PTID3='"+employeeFormBean.getPTID3()+ "',"+
+					"PTID4='"+employeeFormBean.getPTID4()+ "',"+
+					"PTID5='"+employeeFormBean.getPTID5()+ "',"+
+					"primary_role='"+employeeFormBean.getPrimaryRole()+"'"+
+					"where username='"+employeeFormBean.getUsername()+"'";
+					PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
+					System.out.println(sql);
+					ps.executeUpdate();
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}		
+
+
+	}
 }
+
