@@ -1,62 +1,48 @@
-String check = (SELECT * FROM +employee WHERE username=(++employeeFormBean.getUsername()+ "','"					
-			stmt.execute(check)+ "','"
-			rs = stmt.getResultSet()+ "','"
-			rs.next()+ "','"
 
-			+employeeFormBean.getLastName()+ "','"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title></title>
+</head>
+	<script src="../../codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../../codebase/dhtmlxscheduler.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
-			+employeeFormBean.getFirstName()+ "','"
+	
+<style type="text/css" media="screen">
+	html, body{
+		margin:0px;
+		padding:0px;
+		height:100%;
+		overflow:hidden;
+	}	
+</style>
 
-			+employeeFormBean.getEmployeeID(rs.getInt(()+ "','"
+<script type="text/javascript" charset="utf-8">
+	function init() {
+		scheduler.config.multi_day = true;
+		
+		scheduler.config.xml_date="%Y-%m-%d %H:%i";
+		scheduler.init('scheduler_here',new Date(2010,0,10),"week");
+		scheduler.load("./data/events.xml");
+		
+	}
+</script>
 
-			+employeeFormBean.getAge()+ "','"
-
-			+employeeFormBean.getGender()+ "','"
-
-			+employeeFormBean.getMaritalStatus()+ "','"
-
-			+employeeFormBean.getDOB()+ "','"
-
-			+employeeFormBean.getRace()+ "','"
-
-			+employeeFormBean.getEthnicity()+ "','"
-
-			+employeeFormBean.getLanguage()+ "','"
-
-			+employeeFormBean.getPicture()+ "','"
-
-			+employeeFormBean.getHomePhone()+ "','"
-
-			+employeeFormBean.getCellPhone()+ "','"
-
-			+employeeFormBean.getEmail()+ "','"
-
-			+employeeFormBean.getResidentialStreet()+ "','"
-
-			+employeeFormBean.getResidentialCity()+ "','"
-
-			+employeeFormBean.getResidentialState()+ "','"
-
-			+employeeFormBean.getResidentialZipcode()+ "','"
-
-			+employeeFormBean.getMailStreet()+ "','"
-
-			+employeeFormBean.getMailCity()+ "','"
-
-			+employeeFormBean.getMailState()+ "','"
-
-			+employeeFormBean.getMailZipcode()+ "','"
-
-			+employeeFormBean.getSSN()+ "','"
-
-			+employeeFormBean.getPTID1()+ "','"
-
-			+employeeFormBean.getPTID2()+ "','"
-
-			+employeeFormBean.getPTID3()+ "','"
-
-			+employeeFormBean.getPTID4()+ "','"
-
-			+employeeFormBean.getPTID5()+ "','"
-
-			+employeeFormBean.getPrimaryRole())+ "','"
+<body onload="init();">
+	<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+		<div class="dhx_cal_navline">
+			<div class="dhx_cal_prev_button">&nbsp;</div>
+			<div class="dhx_cal_next_button">&nbsp;</div>
+			<div class="dhx_cal_today_button"></div>
+			<div class="dhx_cal_date"></div>
+			<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+			<div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+			<div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+		</div>
+		<div class="dhx_cal_header">
+		</div>
+		<div class="dhx_cal_data">
+		</div>
+	</div>
+</body>

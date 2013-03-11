@@ -11,8 +11,6 @@
 <meta http-equiv="pragma" content="no-cache">
 <!-- says not to use cached stuff, if there is any -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<s:head />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Staff Login Page</title>
 </head>
